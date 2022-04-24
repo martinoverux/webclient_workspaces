@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구조분해할당(비구조화할당)</title>
+</head>
+<body>
+    <h1>구조분해할당(비구조화할당)</h1>
+    <h2>배열</h2>
+    <button onclick="test1();">확인</button>
+    <button onclick="test2();">활용</button>
+    <script>
+        /**
+         * Destructuring Assignment - array
+         */
+        const test1 = () => {
+            const arr = [1, 2, 3];
+            // const a = arr[0];
+            // const b = arr[1];
+            // const c = arr[2];
+            const [a, b , c] = arr; // 각 인덱스 별로 변수를 담는다.
+            console.log(a, b);
+
+            // 변수 값교환
+            let x = 7;
+            let y = 8;
+            [x, y] = [y, x];
+            console.log(x, y);
+
+            // 기본값 지정
+            const alpha = ['a', 'b', 'c'];
+            const [k, l, m = 'x', n = 'd'] = alpha;
+            console.log(k, l, m, n);
+
+            // 나머지 파라미터 rest parameter
+            // 구조분해 할당 마지막에만 사용가능
+            // q배열에 담아라!
+            const [o, p, ...q] = [1, 2, 3, 4];
+            console.log(o, p, q);
+
+            // 전개 연산자 spread operator
+            // q의 요소를 뿌려라
+            const other = [...q];
+            console.log(q, other, q === other);
+            console.log([...alpha, ...q]);
+            console.log(alpha.concat(q));
+        };
+
+        const test2 = () => {
+                const arr = [1, 2, 3];
+                proccess(arr);
+
+                // @실습문제 : 리턴구문에서 구조분해 할당
+                // calc 호출 결과 두 수의 합, 차, 곱, 몫, 나머지를 리턴하고 호출부 변수에 담아 출력
+        
+                const [...e] =  calc(10, 3);
+                console.log(e);
+            };
+        
+        const calc = (a, b) => {
+          return [a+b, a-b, a*b, Math.trunc(a/b), a%b];
+        }
+
+        
+
+        /**
+         * 매개변수부에서 구조분해 할당 사용
+         */
+        const proccess = ([a, b, c, d = .5]) =>{
+                // const [a, b, c] = arr;
+                console.log(a * b / c + d);
+            };
+    </script>
+
+    <h2>객체</h2>
+    <button onclick="test3();">확인</button>
+    <button onclick="test4();">중첩객체</button>
+    <button onclick="test5();">나머지파라미터</button>
+    <script>
+        /**
+         * 구조분해 할당 - 객체
+         */
+        const test3 = () => {
+            const obj = {
+                c : true,
+                a : 1,
+                b : 2
+            }
+            const {a, b, d = '안녕'} = obj; // obj 속성 a값을 상수 a에 대입, 속성 b값을 상수 b에 대입
+            // const a = obj.a;
+            // const b = obj.b;
+            console.log(a, b, d);
+
+            // 변수명을 달리 사용하고 싶은 경우
+            const {a : foo, b : bar, d : doo = 'hello'} = obj;
+            console.log(foo, bar, doo);
+
+            // 변수 -> 객체
+            const x = 10;
+            const y = '안녕';
+            const z = {
+                x: x,
+                y: y
+            };
+            console.log(z);
+        };
+
+        // 중첩 객체를 구조분해 할당하기
+        const test4 = () => {
+            const user = {
+                id: 'honggd',
+                name: {
+                    firstName: '길동',
+                    familyName: '홍'
+                },
+                age: 33,
+                sns: ['facebook', 'twitter', 'instagram']
+            }
+
+            const {id, name: {firstName}, sns: [mainSns]} = user;
+            console.log(id, firstName, mainSns);
+
+            // 매개변수부
+            processId(user);
+            processMainSns(user);
+            processFamilyName(user);
+
+            // 리턴값 처리
+            const {name, url, tel: [mainTel], addr: {'종로 지원': jongno}} = getKHInfo();
+            // 교육원명, url, 대표전화1개, 종로지원의 주소
+            console.log(name, url, mainTel, jongno);
+        };
+
+        const processId = ({id}) => {
+            // id 출력
+            console.log(id);
+        };
+
+        const processMainSns = ({sns: [mainSns]}) => {
+            // mainSns 출력
+            console.log(mainSns);
+        };
+
+        const processFamilyName = ({name: {familyName}}) => {
+            // fimilyName 출력
+            console.log(familyName);
+        };
+
+
+
+        /**
+         * 화살표함수에서 객체를 리턴하는 경우 ({}) 형태로 처리
+         */
+        const getKHInfo = () => ({
+            name : 'KH정보교육원',
+            url :  'https://iei.or.kr',
+            tel : ['070-1234-1234', '070-2345-2345'],
+            addr : {
+                '강남 지원': '서울시 강남구',
+                '종로 지원': '서울시 종로구',
+                '당산 지원': '서울시 영등포구'
+            }
+        }); 
+
+        /**
+         * 객체구조분해할당에서 나머지 파라미터
+         */
+        const test5 = () => {
+            const obj = {
+                a: 1,
+                b: '안녕',
+                c: true,
+                d: {
+                    yyyy: 2022,
+                    mm: 4,
+                    dd: 20
+                }
+            };
+
+            const {a, b, ...rest} = obj;
+            console.log(a, b);
+            console.log(rest);
+        };
+    </script>
+</body>
+</html>

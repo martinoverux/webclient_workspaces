@@ -1,0 +1,135 @@
+/*
+    사용위치
+    member.html (회원가입)
+    login.html (로그인)
+*/
+/*===================== common =====================*/
+.joinSection, .loginSection{
+    padding: 25px 0;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+form>h1 {
+    margin: 20px;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+fieldset>h1 {
+    padding-left: 40px;
+    font-size: 18px;
+}
+#submitBtn {
+    width: 140px;
+    height: 40px;
+    background-color: #043c1c;
+    border: none;
+    border-radius: 50px;
+    color: #ddd;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+/*---------------------- join ----------------------*/
+.join-fieldset {
+    width: 950px;
+    margin: 20px;
+    border: none;
+}
+.join-fieldset li {
+    margin: 10px;
+    list-style: none;
+}
+.join-fieldset label {
+    display: inline-block;
+    width: 100px;
+    color: #0D0D0D;
+}
+.join-fieldset input {
+    margin: 2px;
+    height: 25px;
+    padding-left: 5px;
+    border: 1px solid #aaa;
+    background-color: #fbfbfb;
+    color: #0D0D0D;
+}
+.mailingLi, .genderLi{
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+.genderLi #maleLabel, .genderLi #femaleLabel {
+    width: 50px;
+    margin: 5px
+}
+.mailingLi input{
+    zoom: 1.5;
+}
+.mailingLi label {
+    width: auto;
+}
+label.address  {
+    height: 100px;
+    float: left;
+}
+.joinSection #submitBtn {
+    margin-bottom: 50px;
+}
+
+/*--------------------- login ----------------------*/
+.login-fieldset {
+    width: 500px;
+    /* height: 250px; */
+    /* border: 1px solid #A68965; */
+    border: none;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: auto;
+}
+.login-fieldset .input-div {
+    width: 400px;
+    margin: 30px;
+    padding: 0;
+}
+.input-div input {
+    width: inherit;
+    height: 50px;
+    padding-left: 15px;
+    background-color: #fbfbfb;
+    border: 1px solid #ddd;
+    font-size: 15px;
+}
+.input-div input:first-of-type {
+    border-radius: 5px 5px 0px 0px;
+}
+.input-div input:last-of-type {
+    border-radius: 0px 0px 5px 5px;
+}
+#moveToJoin {
+    margin: 30px auto 30px;
+    font-size: 15px;
+    color: #888;
+    text-decoration: none;
+}
+#moveToJoin:hover {
+    color: #043c1c;
+    text-decoration: none;
+}
+
+
+footer {
+    margin: 0 -12px;
+    background-color: #ddd4;
+}

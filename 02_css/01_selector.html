@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자</title>
+    <!-- 내부 스타일 태그 좋은 위치 
+        <style></style>
+    -->
+</head>
+<body>
+    <h1 class="group1" title="제목입니다.">선택자</h1>
+    <!-- 
+        특정 html 태그를 선택해서 스타일을 적용하도록 하는 하는 문법
+        - 태그명
+        - id
+        - class
+        - 속성명
+        - 상태
+        ...
+     -->
+     <!-- div>ul>li{HelloWorld$}*5 -->
+     <div>
+         <ul>
+             <li id="hw1" class="group1" title="HelloWorld1">HelloWorld1</li>
+             <li id="hw2" class="group1">HelloWorld2</li>
+             <li id="hw3" class="group2" title="HelloWorld3">HelloWorld3</li>
+             <li id="hw4" class="group2">HelloWorld4</li>
+             <li id="hw5" class="group1 group2">HelloWorld5</li>
+         </ul>
+     </div>
+     <style>
+         /* 태그 선택자 */
+         /* li{color: chocolate ;} */
+
+         /* 아이디 선택자 */
+        /* #hw1 {color: cadetblue;} */
+
+         /* 클래스 선택자 */
+         /* .group1 {color: yellowgreen;} */
+         /* .group1.group2 {color: violet;} */
+
+         /* 속성 선택자 */
+        /* [title] {color: tomato;} */
+        /* [title=HelloWorld3] {text-decoration:underline;} */
+
+        /* 혼용하기 */
+        /* li.group1 {color: red;} */
+        /* li[title] {background-color: thistle;} */
+
+        /* 여러 개 */
+        #hw1, .group2{color: violet;}
+
+     </style>
+
+     <h2>자식 | 후손 선택자</h2>
+     <!-- div#mydiv>h4+ul>li*2 -->
+     <div id="parent">
+         <h4>h4 안녕</h4>
+         <ul>
+             <li>li 잘가</li>
+             <li>li 여보세요</li>
+         </ul>
+         <!-- div#otherdiv>h4+ul>li*2 -->
+         <div id="child">
+             <h4>h4 안녕</h4>
+             <ul>
+                 <li>li 잘가</li>
+                 <li>li 여보세요</li>
+             </ul>
+         </div>
+     </div>
+     <style>
+         /* div {border: 1px solid black;} */
+         /* 자식 선택자 */
+        /* div#parent > h4 {color:tomato} */
+
+         /* 후손 선택자 */
+        /* div#parent h4 {color:tomato} */
+
+        /* #parent로부터 시작해서 #child의 자식 li 태그만 color를 orange로 변경  */
+        /* div#parent > div#child li {color: orange;} */
+        </style>
+
+        <!-- div>p#p${Hi KH$} * 5 -->
+        <div>
+            <p id="p1">Hi KH 1</p>
+            <p id="p2">Hi KH 2</p>
+            <p id="p3">Hi KH 3</p>
+            <p id="p4">Hi KH 4</p>
+            <p id="p5">Hi KH 5</p>
+            <h4>Hi KH 6</h4>
+        </div>
+        <style>
+            /* 다음 형제 하나 선택자 */
+            /* p#p2 + p {background-color: tomato;} */
+            /* p#p2 + * {background-color: tomato;} */
+
+            /* 다음 형제 모두 선택자 */
+            /* p#p2 ~ p {background-color: tan;} */
+            /* p#p2 ~ * {background-color: tan;} */
+        </style>
+
+        <div>
+            <input type="text"><br>
+            <input type="text" name="username"><br>
+            <input type="text" name="useremail"><br>
+            <input type="text" name="petname"><br>
+            <input type="text" name="usage"><br>
+        </div>
+        <style>
+            /* input[name]{width: 400px;} */
+            /* input[name=username]{width: 400px;} */
+            /* input[name^=user] {background-color: pink;} */
+            /* input[name$=name] {background-color: pink;} */
+            /* input[name*=us] {background-color: pink;} */
+        </style>
+
+        <div>
+            <!-- p#active>lorem -->
+            <p id="active">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut exercitationem qui, reprehenderit reiciendis dicta, perspiciatis iusto laudantium impedit blanditiis ipsum ratione quaerat unde expedita et illo praesentium fuga voluptate nobis?</p>
+            <p id="hover">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, eveniet corrupti reprehenderit voluptatem dicta atque rerum vero aliquid sed expedita esse quibusdam ex fugit veniam laboriosam vitae voluptatibus ipsum quidem.</p>
+        </div>
+        <style>
+            /* 가상선택자 */
+            /* :active 클릭했을 때 */
+            #active:active {background-color: blueviolet; color: white;}
+            /* :hover 마우스 호버했을 때 */
+            #hover:hover {background-color: tomato; color: white;            }
+        </style>
+
+        <div>
+            <a href="http://www.innerbody.com/htm/body.html">링크</a>
+        </div>
+        <style>
+            a:link{color: aqua;} /*방문 전*/
+            a:visited{color: violet;} /*방문 후*/
+            a:hover{color: yellow;} /**/
+            a:active{color: blue;} /**/
+        </style>
+
+        <div>
+            <input type="text" nam="string" id="string">
+            <br>
+            <input type="checkbox" name="fruit" id="apple">
+            <label for="apple">사과</label>
+            <input type="checkbox" name="fruit" id="banana">
+            <label for="banana">바나나</label>
+            <input type="checkbox" name="fruit" id="peach">
+            <label for="peach">복숭아</label>
+        </div>
+        <style>
+            /* :focus 입력가능한 상태 */
+            input[name=string]:focus {background-color: black; color: gray;}
+
+            /* :checked */
+            input[type=checkbox]:checked {width: 100px; height: 100px;}
+            /* 체크된 체크박스의 라벨태그도 글자크기 확대 */
+            input[type=checkbox]:checked + label {font-size: 100px;}
+        </style>
+
+        <div id="foo">
+            <pre>봄0</pre>
+            <p>봄1</p>
+            <p>봄2</p>
+            <p>봄3</p>
+            <p>봄4</p>
+            <p>봄5</p>
+            <pre>봄6</pre>
+        </div>
+        <style>
+            /* 위치 선택자 */
+           /* div#foo :first-child {color: red;} */
+           /* div#foo pre:last-child {color: red;} */
+           /* div#foo :nth-child(2) {color: red;} */
+           /* div#foo :nth-child(2n) {color: red;} */
+           /* div#foo :nth-last-child(2) {color: red;} */
+
+           /* 타입 위치 선택자 */
+           /* div#foo p:first-of-type {color: red;} */
+           /* div#foo p:last-of-type {color: violet;} */
+           /* div#foo p:nth-of-type(2) {color: violet;}  */
+
+            /* 부정 선택자 */
+            /* div#foo :not(p:first-of-type) {color: red;} */
+
+            /* 최상위 선택자 */
+            :root {background-color: beige;}
+
+        </style>
+</body>
+</html>

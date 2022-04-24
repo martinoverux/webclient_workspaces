@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table</title>
+</head>
+<body>
+   <h1>table</h1> 
+   <table>
+    <thead>
+        <tr>
+            <th>브라우져명</th>
+            <th>제조사</th>
+            <th>홈페이지</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>크롬</td>
+            <td>Google</td>
+            <td>https://google.com</td>
+        </tr>
+        <tr>
+            <td>사파리</td>
+            <td>Apple</td>
+            <td>https://apple.com</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2">총 브라우져 수</td>
+            <td>2</td>
+        </tr>
+    </tfoot>
+</table>
+<style>
+    table {
+        border: 1px solid #000;
+        border-collapse: collapse; /*seperate가 기본값*/
+        width: 500px;
+        height: 300px;
+        table-layout: fixed; /*테이블 길이 고정*/
+    }
+    th, td {
+        white-space: nowrap;
+        overflow-x: scroll;
+        border: 1px solid #000;
+        vertical-align: top;
+        text-align: center;
+    }
+</style>
+
+<div class="box">
+    <span>안녕</span>
+</div>
+
+<div class="square"><span>안녕</span></div>
+
+<style>
+    .square {
+        width: 100px;
+        height: 100px;
+        background-color: hotpink;
+        margin: 0px auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: greenyellow;
+        margin: 100px auto;
+        display: table;
+        text-align: center;
+    }
+    .box span {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+
+</body>
+</html>

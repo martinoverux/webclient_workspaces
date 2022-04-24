@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록</title>
+</head>
+<body>
+    <h1>목록</h1>
+    <nav>
+        <ul class="menu">
+          <li id="home"><a href="#">Home</a></li>
+          <li id="html"><a href="#">HTML5</a></li>
+          <li id="css">
+            <a href="#">CSS3</a>
+            <ul class="submenu">
+              <li><a href="#">Bootstrap</a></li>
+              <li><a href="#">Foundation</a></li>
+            </ul>
+          </li>
+          <li id="js">
+            <a href="#">Javascript</a>
+            <ul class="submenu">
+              <li><a href="#">React</a></li>
+              <li><a href="#">Vue</a></li>
+            </ul>
+          </li>
+          <li id="jquery"><a href="#">jQuery</a></li>
+        </ul>
+      </nav>
+      <style>
+      nav {
+        width: 80%;
+        margin: 0 auto;
+      }
+      ul.menu, ul.submenu {
+        padding: 0px;
+        list-style: none;
+      }
+      
+      ul.menu li {
+        float: left;
+        background-color: #c9c9c9;
+        text-align: center;
+        border-right: 1px #818181 solid;
+        box-shadow: 1px 1px 8px #bbb;
+        width: 8em;
+        height: 2.5em;
+      }
+      ul.menu a {
+        display: block; /* inline요소를 block요소로 변경해서 width/height값을 갖도록 함 */
+        text-decoration: none;
+        color: #292929;
+        padding: .8em .5em;
+      }
+      ul.menu li:hover {
+        background-color: #333;
+      }
+      ul.menu li:hover a {
+        color: #fff;
+      }
+      ul.menu > li:first-child {
+        border-radius: .5em 0 0 .5em;
+      }
+      ul.menu > li:last-child {
+        border-radius: 0 .5em .5em 0;
+        border: 0; /* border-right 제거 */
+      }
+      ul.menu ul {
+        display: none; /* 안보임 처리 */
+      }
+      ul.menu > li:hover ul {
+        display: block; /* 보임 처리 */
+      }
+      ul.menu > li li {
+        border: 0;
+        border-radius: 0;
+      }
+      </style>
+
+
+
+
+
+</body>
+</html>

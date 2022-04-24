@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경계선</title>
+</head>
+<body>
+    <h1>경계선</h1>
+    <div class="box"></div>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: springgreen;
+            /* border: 3px solid #000; */
+            border-width: 3px;
+            border-style: solid;
+            /* border-color: #000; */
+            border-top-color: red;
+            border-bottom-color: orange;
+            border-left-color: violet;
+            border-right-color: blue;
+        }
+    </style>
+
+    <h2>border-radius</h2>
+    <!-- 
+        코너를 둥글림 처리 속성
+     -->
+     <div class="box radius"></div>
+     <img class="radius shadow" src="../sample/image/hyunta.jpg" alt="" style="width:200px">
+     <style>
+         .radius {
+             /* top-left top-right bottom-right bottom-right */
+             /* border-radius: 40px 30px 20px 10px; */
+             border-radius: 50%;
+         }
+     </style>
+
+     <h2>box-shadow</h2>
+     <div class="box shadow"></div>
+     <style>
+         .shadow:hover {
+             /* 가로offset 세로offset blur(번짐) spread(그림자) */
+            box-shadow: 5px 5px 10px 3px gray;
+         }
+     </style>
+
+
+
+</body>
+</html>

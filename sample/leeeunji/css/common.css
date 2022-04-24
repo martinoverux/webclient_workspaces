@@ -1,0 +1,153 @@
+#container {
+    margin: 0 auto;
+    padding: 20px 12px;
+    width: 1000px;
+    height: 708px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #fff;
+}
+/*
+    공통 link
+    <link rel="shortcut icon" href="./images/logo_home.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    
+    폰트
+    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Playfair Display', serif;
+    컬러
+    #043c1c - 딥그린
+    #141414 - 메뉴바 텍스트
+    #888888
+*/
+
+/*================ common menu bar =================*/
+header {
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+    padding-top: 20px;
+}
+.menu {
+    display: flex;
+    justify-content: space-between;
+    
+    list-style: none;
+    width: 980px;
+    height: 70px;
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 16px;
+    letter-spacing: -1;
+}
+.menu a {
+    color: #141414;
+    text-decoration: none;
+    padding: 0px 12px ;
+    display: table-cell;
+    vertical-align: middle;
+    line-height: 3.5;
+
+    transition-property: color;
+    transition-duration: 200ms;
+}
+.menu a:hover {
+    font-weight: 700;
+    color: #043c1c;
+}
+.submenu {
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    list-style: none;
+    padding: 0;
+    background: none;
+}
+.menu li:hover .submenu {
+    visibility: visible;
+    transition-property: color;
+}
+.submenu a {
+    height: 45px;
+    line-height: 2.2em;
+    color: #888;
+    font-size: 14px;
+
+    transition-duration: 200ms;
+}
+.submenu li:hover a {
+    color: #043c1c;
+    font-size: 16px;
+}
+
+/* 메뉴바 공백 */
+ul.menu li p {
+    color:rgb(0, 0, 0, 0);
+    width: 500px;
+}
+
+/*---------------------- logo ----------------------*/
+header img#homeLogo {
+    position: absolute;
+    width: 50px;
+    left: 475px;
+    top: 30px;
+}
+
+/*---------------------- top -----------------------*/
+div.toTheTop {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    background-color: #728476;
+    border-radius: 50%;
+    text-align: center;
+
+    position: fixed;
+    top: 90%;
+    right: 2%;
+    box-shadow: 2px 2px 7px #3f4440;
+    transition-duration: 300ms;
+}
+div.toTheTop:hover {
+    background-color: #3F4025;
+    box-shadow: none;
+}
+div.toTheTop img {
+    vertical-align: middle;
+    width: 80%;
+}
+
+/*===================== footer =====================*/
+footer {
+    padding: 50px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+#instarLink {
+    margin: 30px;
+    width: 48px;
+}
+#instarLink img {
+    width: inherit;
+}
+footer p {
+    margin: 5px;
+}
+footer span:not(:last-child)::after {
+    content: "|";
+    padding: 5px;
+}
+footer>hr {
+    width: 30px;
+    height: 2px;
+    border: none;
+    margin: 30px auto 50px;
+}

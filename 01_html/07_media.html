@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미디어관련</title>
+</head>
+<body>
+    <h1>미디어관련</h1>
+    <h2>음악재생</h2>
+    <audio src="../sample/audio/major.mp3" controls muted autoplay></audio>
+    <!-- 
+        autoplay는 브라우져 정책상 지원되지 않을 수 있다.
+     -->
+     <h2>비디오재생</h2>
+     <video src="../sample/video/small.mp4" controls style="width: 300px;"></video>
+     <iframe 
+        width="560" 
+        height="315" 
+        src="https://www.youtube.com/embed/ZPrSpIYyqgc" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+
+    <iframe src="index.html" frameborder="3" width="800" height="500"></iframe>
+
+</body>
+</html>

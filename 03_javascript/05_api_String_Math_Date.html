@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .changeCol {
+            color:rebeccapurple;
+        }
+    </style>
+    <title>API - String | Math | Date</title>
+</head>
+<body>
+    <h1>API - String | Math | Date</h1>
+    <h2>String</h2>
+    <button onclick="test1();">확인</button>
+    <script>
+
+        /**
+         * string 타입의 변수/값은 String 프로토타입의 메소드를 사용할 수 있다.
+         *  
+         */
+        function test1() {
+            const str = "Apple Samsung PineApple";
+
+            console.log("toUpperCase : ", str.toUpperCase());
+            console.log("toLowerCase : ", str.toLowerCase());
+
+            console.log("indexOf : ", str.indexOf("Sam"));
+            console.log("indexOf : ", str.indexOf("SSSSSSSSSSS"));
+
+            console.log("charAt : ", str.charAt(6));
+            console.log("str[index] : ", str[6]);
+
+            // substring(start, end) start(inclusive), end(exclusive)
+            console.log("substring : ", str.substring(6, 9)); // Sam
+            console.log("substring : ", str.substring(6)); // Samsung PineApple
+            
+            // substr(start, length)
+            console.log("substr : ", str.substr(6, 3));  // Sam
+            console.log("substr : ", str.substr(6)); // Samsung PineApple
+
+            // replace
+            console.log("replace : ", str.replace('Apple', '사과'));
+            console.log("replace : ", str.replace('Apple', ''));
+            console.log("replace : ", str.replace(/Apple/g, '')); // 정규표현식
+           
+            // let result = str;
+            // while(result.indexOf('Apple') > -1){
+            //     result = result.replace('Apple', '')
+            // }
+            // console.log(result);
+
+            // str에서 대문자 A /소문자 a의 갯수를 조회
+
+            let count = 0;
+            for(let i = 0; i < str.length; i++){
+               if( str.charAt(i) == 'a' || str.charAt(i) == 'A' ){
+                //    if(str[i] == 'a' || str[i] == 'A'){
+                   count++;
+               }
+            }
+            console.log(count);
+        }   
+    </script>
+
+    <h2>Math</h2>
+    <button onclick="test2();">확인</button>
+    <button onclick="test3();">@실습문제</button>
+    <ul id="test">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        /**
+         * Math
+         *  - Math.ceil
+         *  - Math.round
+         *  - Math.floor | Math.trunc
+         *  - Math.random
+         * 
+         */
+        function test2(){
+            console.log(Math.ceil(123.45));
+            console.log(Math.round(123.45));
+            console.log(Math.floor(123.45));
+            
+            const n = 1234.565432;
+            console.log(Math.round(n * 100) / 100);
+
+
+            const rnd = Math.random();
+            // 0.0 이상 1.0 미만의 난수 생성
+            console.log(rnd);
+            // 1 ~ 10 사이의 정수형 난수 : 버림(난수 * 경우의 수) +최솟값
+            console.log(Math.floor(rnd*10) + 1);
+        }
+
+        /**
+         *  ul#test li 태그에 1~ 1000 사이의 난수를 대입하고, 짝수인 경우 color 변경
+         * 
+         */
+        function test3() {
+            const ulist = document.getElementById('test');
+            const lis = ulist.children;    
+
+            for(let i = 0; i < lis.length; i++){
+                lis[i].innerHTML= Math.floor(Math.random() * 1000) + 1;;
+                if(lis[i].innerHTML % 2 == 0){
+                    lis[i].classList.add('changeCol');
+                }
+                else{
+                    lis[i].classList.remove('changeCol');
+                }
+
+                console.log(lis[i].innerHTML)
+            }
+        }
+    </script>
+
+    <h2>Date</h2>
+    <div id="clock"></div>
+    <button onclick="test4();">확인</button>
+    <script>
+        /**
+         * Data
+         * - 날짜, 시각정보를 관리하는 객체
+         * - Date.prototype이 제공하는 메소드 사용
+         * 
+         */
+        function test4(){
+            const now = new Date(); // new 생성자함수 호출
+            console.log(typeof now, now.toString());
+            console.dir(now);
+            console.log("getFullYear : ", now.getFullYear());
+            console.log("getMonth : ", now.getMonth() + 1); // 0 ~ 11 인덱스
+            console.log("getDate : ", now.getDate());
+
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            console.log("getDay : ", now.getDay()); // 일요일(0) ~ 토요일(6)
+            console.log("요일 : ", days[now.getDay()]); // 일요일(0) ~ 토요일(6)
+
+            console.log("getHours : ", now.getHours());
+            console.log("getMinutes : ", now.getMinutes);
+            console.log("getSeconds : ", now.getSeconds);
+
+            console.log("unix time : ", now.getTime());
+            console.log("unix time : ", Date.now());
+
+            // 특정 날짜시각 정보를 가진 Date 객체 생성
+            console.log(new Date('2022/01/01'));
+            console.log(new Date('2022/01/01 15:25:56'));
+            console.log(new Date('2022/01/01 15:25:56'));
+            console.log(new Date(2022, 0, 1- 1, 15, 25, 56));
+
+            const millis = new Date(2022, 0 , 1).getTime();
+            console.log(new Date(millis));
+
+            // 두 날짜 차이 구하기
+            const tomorrow = new Date(2022, 4 - 1, 15, 18, 0);
+            const diff = (tomorrow - now) / 1000 / 60 / 60 / 24; // Date - Date = millis
+            console.log(diff); // 일단위
+        }
+
+        function displayClock(date) {
+            const f = function(n) {
+                return (n < 10) ? '0' + n : n;
+            };
+
+            const yyyy = date.getFullYear();
+            const MM = f(date.getMonth() + 1);
+            const dd = f(date.getDate());
+            const hh = f(date.getHours());
+            const mm = f(date.getMinutes());
+            const ss = f(date.getSeconds());
+
+            const str = `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
+            clock.innerHTML = str;
+
+            // 1초 후에 다시 호출
+            // 1 * 1000ms
+            setTimeout(function(){
+                displayClock(new Date());
+            }, 1000)
+        }
+        
+        displayClock(new Date());
+    </script>
+  
+</body>
+</html>

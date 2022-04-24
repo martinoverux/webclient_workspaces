@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클래스값으로 DOM 제어</title>
+  <style>
+  table {
+    border: 1px solid #000;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 5px;
+  }
+  .on {
+    background-color: hotpink;
+    color: #fff;
+  }
+  .gungseo {
+      font-family: 궁서, 'serif';
+  }
+  </style>
+</head>
+<body>
+  <h1>클래스값으로 DOM 제어</h1>
+  <!-- table>thead>tr>th -->
+  <table>
+    <thead>
+      <tr>
+        <th colspan="5">수강신청</th>
+      </tr>
+    </thead>
+    <!-- tbody>tr>td -->
+    <tbody>
+      <tr>
+        <td colspan="5">
+          <input type="checkbox" id="checkAll" onchange="checkAllChanged()">
+          <label for="checkAll">전체선택/해제</label>
+        </td>
+      </tr>
+      <!-- tr>(td>input:checkbox[name=subject]#subject$+label[for=subject$])*5 -->
+      <tr>
+        <td class="gungseo"><input type="checkbox" name="subject" id="subject1" onchange="subjectChanged(this);"><label for="subject1">국어</label></td>
+        <td class="gungseo"><input type="checkbox" name="subject" id="subject2" onchange="subjectChanged(this);"><label for="subject2">영어</label></td>
+        <td class="gungseo"><input type="checkbox" name="subject" id="subject3" onchange="subjectChanged(this);"><label for="subject3">수학</label></td>
+        <td class="gungseo"><input type="checkbox" name="subject" id="subject4" onchange="subjectChanged(this);"><label for="subject4">사회</label></td>
+        <td class="gungseo"><input type="checkbox" name="subject" id="subject5" onchange="subjectChanged(this);"><label for="subject5">과학</label></td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+
+
+  /**
+   * #checkAll 체크/체크해제했을때 change이벤트핸들러
+   */
+  function checkAllChanged(){
+    console.log("checkAllChanged");
+    // const subjects = document.getElementsByName('subject');
+    const subjects = document.querySelectorAll('[name=subject]');
+    console.log(subjects);
+    const checkAll = document.querySelector("#checkAll");
+
+    for(let i = 0; i < subjects.length; i++){
+      const subject = subjects[i];
+      // 1. 체크/체크해제 처리
+      subject.checked = checkAll.checked;
+      // 2. 부모td.on 처리
+      toggleClassOn(subject);
+    }
+  }
+
+    /**
+   * [name=subject]가 체크/체크해제되었을때 change이벤트핸들러
+   *  - 어느 체크박스에서 호출한 것인지 확인하기 위해 id매개변수가 꼭 필요
+   *  - this용법 
+   *    1. inline 이벤트 속성에 기술된 this는 태그 객체 자신이다.
+   */
+   function subjectChanged(subject){
+    // console.log("this", subject);
+    toggleClassOn(subject);
+
+    // 전체선택 체크박스 처리 
+    // - 모두 체크된 경우 #checkAll.checked = true
+    // - 하나라도 체크 해제된 경우 #checkAll.checked = false
+    const subjects = document.querySelectorAll('[name=subject]');
+    const checkedSubjects = document.querySelectorAll('[name=subject]:checked');
+    const checkAll = document.querySelector("#checkAll")
+    // console.log(subjects, checkedSubjects);
+    checkAll.checked = (subjects.length == checkedSubjects.length);
+
+  }
+
+  function toggleClassOn(subject){
+    const parentTd = subject.parentElement;
+    if(subject.checked){
+        parentTd.classList.add("on");
+    }
+    else {
+        parentTd.classList.remove("on");
+    }
+  } 
+  </script>
+
+
+
+
+</body>
+</html>

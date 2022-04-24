@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>사용자와 상호작용</title>
+</head>
+<body>
+  <h1>사용자와 상호작용</h1>
+  <button onclick="test1()">alert | console</button>
+  <button onclick="test2()">confirm</button>
+  <button onclick="test3()">prompt</button>
+  <div id="area"></div>
+  <hr>
+  <button onclick="test4()">innerHTML</button>
+  <button onclick="test5()">innerText</button>
+  <button onclick="test6()">outerHTML</button>
+  <div id="foo">안녕하세요. 저는 <mark>박혁거세</mark>입니다.</div>
+  <script>
+  /**
+   * outerHTML
+   * - getter : 태그 자신을 포함한 html 반환
+   * - setter : 태그 자신을 대체
+   */
+  function test6(){
+    console.log(foo.outerHTML);
+    // <div id="foo">안녕하세요. 저는 <mark>박혁거세</mark>입니다.</div>
+    
+    foo.outerHTML = '<div id="foo">안녕하세요. 저는 <mark>정현동</mark>입니다.</div>';
+  }
+   
+  /**
+   * innerText
+   * - getter (자식 html요소는 제거)
+   * - setter (html요소를 text처리)
+   */
+  function test5(){
+    console.log(foo.innerText); // getter (자식 html요소는 제거)
+    // 안녕하세요. 저는 박혁거세입니다.
+
+    const html = foo.innerHTML;
+    area.innerText = html; // setter (html요소를 text처리)
+  } 
+
+  /**
+   * innerHTML
+   * - getter (자식 html요소를 포함)
+   * - setter (html요소 표현)
+   */
+  function test4(){
+    console.dir(foo.innerHTML); // getter (자식 html요소를 포함)
+    
+    const html = foo.innerHTML;
+    area.innerHTML = html; // setter (html요소 표현)
+  }
+
+
+  /**
+   * prompt
+   * - 사용자로부터 한줄짜리 입력값을 받는 메소드
+   * - 텍스트필드, 확인/취소 버튼을 제어
+   * - 확인시 입력값(string)이 리턴, 취소시 null이 리턴
+   */
+  function test3(){
+    const name = prompt('이름을 입력하세요');
+    console.log(typeof name, name);
+
+    // 값을 논리값을 자동형변환
+    // - 값("hello", 123, 34.56)이 있으면 true
+    // - 값("", null, undefined)이 없으면 false
+    if(name){
+      // area.innerHTML = "<h2>" + name + "님, 반갑습니다.</h2>";
+      
+      // template string(ES6)
+      area.innerHTML = `<h2>${name}님, 반갑습니다.</h2>`;
+    }
+    else {
+      alert(`이름을 
+입
+력
+  해주세요.`);
+      alert("이름을\n입\n력\n 해주세요.");
+    }
+
+  }
+
+  /**
+   * confirm
+   * - 사용자로부터 boolean형 입력을 받을수 있는 메소드
+   * - 확인/취소 버튼으로부터 각각 true/false를 반환
+   */
+  function test2(){
+    const bool = confirm('정말 삭제하시겠습니까?');
+    console.log(typeof bool, bool);
+
+    if(bool){
+      // 삭제 프로세스...
+      alert('파일이 삭제되었습니다.');
+    }
+  }
+
+  /**
+   * alert 사용자 알림
+   * console 객체
+   */
+  function test1(){
+    // alert('좋은 아침입니다.');
+    
+    console.log('좋은 아침입니다.'); // 개발용
+    console.error('오류입니다.');
+    console.dir({id: 'honggd'}); // 객체를 계층구조로 확인
+    console.time('abcde');
+    for(let i = 0; i < 1_000_000; i++){
+
+    }
+    console.timeEnd('abcde');
+  }
+  </script>
+  
+</body>
+</html>

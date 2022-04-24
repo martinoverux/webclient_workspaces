@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCS전공교과 UI 디자인 포트폴리오 - 김현우</title>
+    <style>
+        #submit {
+           margin: 0px 0px 0px 100px;
+        }
+        fieldset {
+            width: 850px;
+        }
+
+        fieldset label {
+            font-weight: bold;
+        }
+
+        #title {
+            width: 250px;
+            margin: 0px 0px 5px;
+        }
+
+        #content {
+            /* width: 250px;
+            height: 220px; */
+            margin: 0px 0px 8px;
+        }
+   
+        .notice, th, td {
+            border: 1px solid black;
+        }
+
+        thead, tfoot{
+            background-color:darksalmon;
+            color: #fff;
+        }
+
+        thead {
+            height: 40px;
+        }
+
+        tbody {
+            background-color: antiquewhite;
+        }
+
+        tbody td:nth-of-type(2) {
+            width: 450px;
+        }
+
+        tbody td:nth-of-type(4) {
+            width: 120px;
+        }
+
+        tbody td:nth-of-type(5) {
+            width: 120px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>포트폴리오 문제</h1>
+    <br>   
+    <hr>
+    <br>
+    <form action="insert.no", method="post">
+        <fieldset>
+            <legend>공지사항 작성하기</legend>
+            <label for="title">제목</label>
+            <input type="text" name="title" id="title" placeholder="제목을 입력하시오." required>
+            <br>
+            <label for="content" id="contenttitle">내용</label>
+            <textarea name="content" id="content" cols="30" rows="10"
+            placeholder="내용을 입력하시오." required></textarea>
+            <br>
+            <label for="uploadFile">첨부파일</label>
+            <input type="file" name="uploadFile" id="uploadFile" value="파일 선택" >
+            <br>
+            <br>
+            <input type="submit" id="submit" value="작성하기">
+        </fieldset>
+    </form>
+    <hr>
+    <table class="notice">
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th colspan="2">제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회수</th>
+                <tbody>
+                    <tr>
+                        <td>9</td>
+                        <td>공지사항 제목 9</td>
+                        <td><input type="button" value="바로가기"></td>
+                        <td>user01</td>
+                        <td>2021-03-29</td>
+                        <td>34</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>공지사항 제목 6</td>
+                        <td><input type="button" value="바로가기"></td>
+                        <td>answ445</td>
+                        <td>2021-03-12</td>
+                        <td>67</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>공지사항 제목 3</td>
+                        <td><input type="button" value="바로가기"></td>
+                        <td>testg12</td>
+                        <td>2021-03-01</td>
+                        <td>98</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>공지사항 제목 2</td>
+                        <td><input type="button" value="바로가기"></td>
+                        <td>palwe3</td>
+                        <td>2021-01-02</td>
+                        <td>85</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>공지사항 제목 1</td>
+                        <td><input type="button" value="바로가기"></td>
+                        <td>xml23</td>
+                        <td>2020-12-24</td>
+                        <td>124</td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">전체공지사항 갯수</th>
+                            <th colspan="2">5개</th>
+                        </tr>
+                    </tfoot>
+                </tbody>
+            </tr>
+        </thead>
+    </table>
+</body>
+</html>

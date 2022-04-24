@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>display</title>
+</head>
+<body>
+    <h1>display</h1>
+    <!-- 
+        inline 요소(display:inline) span, a, img ...
+        block 요소(display:block) div, h1, p ...
+     -->
+
+     <div class="box inline">div1</div>
+     <div class="box inline">div2</div>
+     <div class="box inline">div3</div>
+     <hr>
+     <span class="box block">span1</span>
+     <span class="box block">span2</span>
+     <span class="box block">span3</span>
+     <hr>
+     <div class="box inline-block">div1</div>
+     <div class="box inline-block">div2</div>
+     <div class="box inline-block">div3</div>
+     <style>
+         .box{
+             width: 200px;
+             height: 200px;
+             background-color: goldenrod;
+             border: 3px solid #000;
+         }
+         .inline-block {
+             display: inline-block;
+         }
+         .block {
+             display: block;
+         }
+         .inline {
+             display: inline;
+         }
+     </style>
+
+     <h2>숨김처리</h2>
+     <div class="box display-non">diplay:none</div>
+     <hr>
+     <div class="box visibility-hidden">visibility:hidden</div>
+     <hr>
+     <div class="box opacity0">opacity:0</div>
+     <hr>
+     <style>
+         .display-non {
+             display: none;
+         }
+         .visibility-hidden {
+             visibility: hidden;
+         }
+         .visibility-hidden:hover { /* Not Working */
+             visibility: visible;
+         }
+         .opacity0 {
+             opacity: 0;
+         }
+         .opacity0:hover { /* Working */
+             opacity: 1;
+         }
+     </style>
+
+
+</body>
+</html>

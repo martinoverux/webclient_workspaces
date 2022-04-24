@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- prefix.js 연결 -->
+    <script src="./js/prefixfree.min.js"></script>
+    <title>transform</title>
+</head>
+<body>
+    <h1>transform</h1>
+    <!-- 
+        transform  변형
+            - 요소 이동
+            - 확대/축소
+            - 회전
+            - 비틀기
+     -->
+     <div class="wrapper">
+         <img src="../sample/image/flower1.PNG" alt="" class="transform transform1">
+         <hr>
+         <img src="../sample/image/flower2.PNG" alt="" class="transform transform2">
+         <hr>
+         <img src="../sample/image/flower3.PNG" alt="" class="transform transform3">
+         <hr>
+     </div>
+     <style>
+         /* 
+            브라우져별 접두사 Vendor Prefix
+            - css3 표준을 아직 지원하지 않는 브라우져의 해당기능 지원을 위한 문법
+            - 해당 브라우져에 해당되는 vendor prefix를 자동으로 실행
+            
+            -webkit- 크롬/사파리/엣지
+            -moz- 파이어폭스
+            -o- 오페라
+            -ms- IE
+
+            -브라우져별 vendor prefix 문법 작성 후, 표준 문법을 작성한다.
+         */
+
+
+         .wrapper { text-align: center;}
+         .wrapper img {width: 200px; margin: 100px;}
+         .transform1:hover {
+
+            -webkit-transform: translate(50px, 30px); /*translate 이동*/
+            -moz-transform: translate(50px, 30px); /*translate 이동*/
+            -o-transform: translate(50px, 30px); /*translate 이동*/
+            -ms-transform: translate(50px, 30px); /*translate 이동*/
+            transform: translate(50px, 30px); /*translate 이동*/
+         }
+         .transform2:hover {
+             transform: scale(1.5, 1.5);
+         }
+
+         .transform3:hover {
+             /* 양수: 시계방향, 음수: 반시계방향*/
+             transform: rotate(30deg);
+         }
+     </style>
+
+</body>
+</html>

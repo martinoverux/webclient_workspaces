@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EunJi Life</title>
+    <link rel="shortcut icon" href="./images/logo_home.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/foodtrip.css">
+    <script src="./js/foodtrip.js"></script>
+</head>
+<body onload="init();">
+    <div id="container">
+        <header>
+            <ul class="menu">
+                <li><a id="AboutMe" href="aboutme.html">About Me</a></li>
+                <li>
+                    <a id="spareTime" href="#">Spare time</a>
+                    <ul class="submenu">
+                        <li><a class="subM-transition" href="foodtrip.html">Food trip</a></li>
+                        <li><a class="subM-transition" href="#">Music</a></li>
+                    </ul>
+                </li>
+                <li><a href="roadmap.html">Roadmap</a></li>
+                <li><p id="blankP"></p></li>
+                <li class="memberMenu"><a href="member.html">login</a></li>
+                <li class="memberMenu"><a href="member.html">join</a></li>
+            </ul>
+            <a href="index.html">
+                <img src="./images/logo_home.png" alt="home logo" id="homeLogo">
+            </a>
+        </header>
+
+        <div class="toTheTop">
+            <a href="#top">
+                <img src="./images/outline_vertical_align_top_black_24dp.png" alt="to the top">
+            </a>
+        </div>
+
+        <section id="postingBoard">
+            <div>
+                <p class="boardTop">맛집 도장깨기</p>
+                <button class="boardTop" id="creatPostingBtn">Posting</button>
+            </div>
+            <hr id="hr1">
+            <div id="postingBoardDiv">
+                <ul>
+                    <!-- 리뷰 리스팅 영역-->
+                </ul>
+            </div>
+            <hr id="hr2">
+        </section>
+
+        <!-- 리뷰 선택시 -->
+        <section class="visibilityHidden" id="backgroundPlate">
+            <div class="visibilityHidden" id="reviewPlate">
+                <button id="closeReviewBtn"></button>
+                <div class="review-wrapper">
+                    <!-- 목록에서 고른 포스팅 id(=posting_no)에 따라 이미지, 점포정보 끌어오기-->
+                    <h1>Review. <span class="review-element" id="review-posting-no"></span></h1>
+                    <div class="restaurant-Info">
+                        <div class="review-element" id="restaurant-photo-group">
+                            <img id="restaurant-photo" src="./images/foodtrip/foodtrip_20220420_001.jpg" alt="">
+                        </div>
+                        <div class="review-element" id="restaurant-text-group">
+                            <span class="review-element" id="location"></span>
+                            <div>
+                                <h1 class="review-element" id="restaurant-name">
+                                    <strong><span class="review-element" id="review-score">4.3</span></strong>
+                                </h1>
+                            </div>
+                            <p class="posting-date">
+                                <span class="review-element posting-date">작성일 : </span>
+                                <span class="review-element posting-date" id="review-date">2022-04-20</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="review-element" id="restaurant-comment">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat neque voluptatum rem officiis corporis explicabo odio nobis. Consectetur reprehenderit voluptatem est iusto suscipit eos similique sed. Nobis exercitationem quos itaque.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <hr>
+            <p class="footInfo">
+                <span>제작자 : 이은지</span>
+                <span>소속 : KH정보교육원</span>
+                <span>수강 : 자바기반 공공데이터 융합 개발자 양성과정</span>
+            </p>
+            <p class="footInfo">
+                <span>전화 : 010-1995-0408 </span>
+                <span>이메일 : leeeunji@gmail.com</span>
+            </p>
+            <p class="footInfo">
+                <span>주소 : 인천광역시 남동구 이런저런로78-9</span>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

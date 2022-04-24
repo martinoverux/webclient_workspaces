@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>형변환</title>
+</head>
+<body>
+    <h1>형변환</h1>
+    <button onclick="test1();">산술/비교연산</button>
+    <button onclick="test2();">숫자로 형변환</button>
+    <br>
+    <input type="number" name="x" id="x">
+
+    <fieldset>
+        <legend>두 수의 합 구하기</legend>
+        <!-- input:number#num$[placeholder=num$]*2 -->
+        <input type="number" name="nums" id="num1" placeholder="num1">
+        <input type="number" name="nums" id="num2" placeholder="num2">
+        <input type="button" value="계산" onclick="test3();">
+    </fieldset>
+    <script>
+        /**
+         * #num1 #num2 사용자 입력값의 합을 경고창에 출력
+         * - 두 input 태그 값이 모두 입력되지 않은 경우 경고 알림처리 "수를 먼저 입력하세요."
+         * - 계산 후에는 입력값을 삭제처리
+         */
+        // function test3(){
+        //     let num1val = Number(document.getElementById('num1').value);
+        //     let num2val = Number(document.getElementById('num2').value);
+            
+        //     if(num1 == ''|| num2 == ''){
+        //         alert("수를 먼저 입력하세요.");
+        //     }
+        //     else{
+        //         alert(num1 + num2);
+        //         num1 = "";
+        //         num2 = "";
+        //     }
+        // }
+
+        function test3(){
+            const num1Val = num1.value;
+            const num2Val = num2.value;
+
+            // 유효성 검사
+            if(!num1Val || !num2Val){
+            alert("수를 먼저 입력하세요.");
+            return; // 조기리턴 - 이하코드는 실행하지 않고, 중단
+            }
+            
+            alert(`입력하신 두 수의 합은 ${Number(num1Val) + Number(num2Val)} 입니다.`);
+
+            // 초기화
+            num1.value = "";
+            num2.value = "";
+
+        }
+        
+
+
+
+
+    /**
+     * 산술연산, 비교연산 간의 형변환
+     */
+    function test1(){
+        console.log(typeof(3 + "3"), 3 + "3"); // string 33
+
+        console.log(typeof(3 - "3"), 3 - "3"); // number 0
+        console.log(typeof(3 * "3"), 3 * "3"); // number 9
+        console.log(typeof(3 / "3"), 3 / "3"); // number 1
+        console.log(typeof(3 % "3"), 3 % "3"); // number 0
+
+        console.log(typeof(3 - "a"), 3 - "a"); // NaN Not a Number
+        
+        console.log(typeof(3 == "3"), 3 == "3"); // boolean true
+        console.log(typeof(3 != "3"), 3 != "3"); // boolean false
+        
+        // 엄격 비교연산자 === !==
+        // === 타입과 값이 모두 일치해야 true
+        // !== 타입 혹은 값이 달라야 true
+        console.log(typeof(3 === "3"), 3 === "3"); // boolean false
+        console.log(typeof(3 !== "3"), 3 !== "3"); // boolean true
+
+    };
+
+    /**
+     * 숫자로 형변환
+     * - Number() : 숫자로 형변환. 변환불가한 문자가 하나라도 있는 경우, NaN 리턴
+     * 
+     * - ParseInt() : 정수로 형변환
+     * - ParseFloat() : 실수로 형변환
+     */
+    function test2(){
+        const n = "123.456";
+        console.log(typeof n, n);
+        
+        console.log(typeof Number(n), Number(n));  // number 123.456
+        console.log(typeof parseInt(n), parseInt(n)); // number 123
+        console.log(typeof parseFloat(n), parseFloat(n)); // number 123.456
+        
+        const m = "123.456원";
+        console.log(typeof m, m);
+        
+        console.log(typeof Number(m), Number(m));  // number NaN
+        console.log(typeof parseInt(m), parseInt(m)); // number 123
+        console.log(typeof parseFloat(m), parseFloat(m)); // number 123.456
+
+        // input#x
+        console.log(typeof x.value, x.value);
+    }
+    </script>
+
+    <button onclick="test4();">논리형으로 형변환</button>
+    <script>
+        /**
+         * 논리형으로 형변환
+         * - 값이 있는 것은 true로 반환
+         * - 값이 없는 것은 false로 반환
+         * 
+         * - Boolean(), !!(변수/값) 확인
+         */
+        function test4(){
+            // 값이 있는 것
+            console.log(Boolean(123));
+            console.log(Boolean(-123));
+            console.log(Boolean(5.5));
+            console.log(Boolean("헤이"));
+            console.log(!!123);
+            console.log(!!{});
+            console.log(!![]);
+
+            // 값이 없는 것
+            console.log(Boolean(0));
+            console.log(Boolean(0.0));
+            console.log(Boolean(""));
+            console.log(Boolean(''));
+            console.log(Boolean(undefined));
+            console.log(Boolean(null));
+            console.log(Boolean(NaN));
+            console.log(Boolean([].length));
+
+            const arr = [];
+            if(arr.length){
+                // 배열의 요소가 있을 때
+            }
+            else{
+                // 배열의 요소가 없을 때
+            }
+        }
+    </script>
+
+</body>
+</html>

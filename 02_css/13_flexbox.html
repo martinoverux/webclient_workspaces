@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flexbox</title>
+</head>
+<body>
+    <h1>flexbox</h1>
+    <!-- 
+        부모요소 flex-container
+            - flex-direction : row(기본값) | column
+            - justify-content : 메인축 정렬
+            - align-items : 크로스축 정렬
+
+            - flex-wrap : 줄바꿈 여부 nowrap(기본값) | wrap
+            - align-content : 여러 줄 flex-container 설정
+
+            - flex flow
+
+        자식요소 flex-item
+            - flex
+            - flex-grow
+            - flex-shrink
+            - flex-basis
+            - order
+
+     -->
+     <ul class="test test1">
+         <li>1</li>
+         <li>2</li>
+         <li>3</li>
+         <li>4</li>
+         <li>5</li>
+         <li>6</li>
+         <li>7</li>
+         <li>8</li>
+         <li>9</li>
+         <li>10</li>
+     </ul>
+     <style>
+         ul.test {
+             display: flex;
+             flex-direction: row;
+             justify-content: center;
+             align-items: center;
+             flex-wrap: wrap;
+             list-style: none;
+             border: 1px solid red;
+             background-color: lightgray;
+             height: 70vh;
+             padding-left: 0;
+         }
+         ul.test li {
+             width: 100px;
+             height: 100px;
+             background-color: orangered;
+             margin: 8px;
+         }
+     </style>
+</body>
+</html>

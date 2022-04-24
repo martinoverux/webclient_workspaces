@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>객체배열</title>
+</head>
+<body>
+  <h1>객체배열</h1>
+  <button onclick="test1();">객체배열</button>
+  <button onclick="test2();">생성자함수</button>
+  <button onclick="test3();">생성자함수 - prototype - 객체</button>
+  <button onclick="test4();">static</button>
+
+  <script>
+  /**
+   * 객체배열
+   */
+  const test1 = () => {
+    const pets = [];
+    pets.push({
+      name : '구리구리',
+      breed : '푸들',
+      weight : 3,
+      age : 10,
+      color : ["white"],
+      bark(){
+        console.log(this.weight < 10 ? '왈왈' : '멍멍');
+      }
+    });
+    pets.push({
+      name : '둘리',
+      breed : '말티즈',
+      weight : 6,
+      age : 5,
+      color : ["white"],
+      bark(){
+        console.log(this.weight < 10 ? '왈왈' : '멍멍');
+      }
+    });
+    pets.push({
+      name : '사랑이',
+      breed : '코카스파니엘',
+      weight : 13,
+      age : 7,
+      color : ["white", "brown"],
+      bark(){
+        console.log(this.weight < 10 ? '왈왈' : '멍멍');
+      }
+    });
+
+    console.log(pets);
+
+    // 반복문처리 
+    // ?? 가 짖습니다. 왈왈!
+    pets.forEach((pet, index) => {
+      // console.log(index, pet);
+      const {name} = pet;
+      console.log(`${name}가 짖습니다.`);
+      pet.bark();
+    });
+
+  };
+
+  /**
+   * 생성자 함수를 통한 객체 생성
+   * 
+   */
+  const test2 = () => {
+    const pets = [];
+    pets.push(new Pet('구리구리', '푸들', 3, 10, ['white']));
+    pets.push(new Pet('둘리', '말티즈', 6, 5, ['white']));
+    pets.push(new Pet('사랑이', '코카스파니엘', 13, 5, ['white', 'brown']));
+
+    console.log(pets);
+
+    pets.forEach((pet, index) => {
+      const info = `반려동물정보
+---------------------------------
+이름 : ${pet.name}
+종 : ${pet.breed}
+몸무게 : ${pet.weight}
+나이 : ${pet.age}
+색깔 : ${pet.color}
+짖는 소리 : ${pet.bark()}
+---------------------------------`;
+      alert(info);
+    });
+  };
+
+  /**
+   * 생성자함수는 관례상 대문자시작하는 이름을 갖는다.
+   * this용법5. 생성자함수에서 this는 현재객체를 가리킨다.
+   */
+  function Pet(name, breed, weight, age, color){
+    this.name = name;
+    this.breed = breed;
+    this.weight = weight;
+    this.age = age;
+    this.color = color;
+    // this.bark = function(){
+    //   return this.weight < 10 ? '왈왈' : '멍멍';
+    // };
+  }
+
+  // 공통 메소드를 prototype객체(부모)에 작성하고, 자식객체 공유
+  Pet.prototype.bark =function(){
+      return this.weight < 10 ? '왈왈' : '멍멍';
+    };
+
+  function Duck(firstName, lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+  /**
+   * 자바스크립트 프로토타입 기반 객체지향언어
+   * 
+   * - 생성자 함수 Duck 
+   * - prototype객체(부모객체) 
+   * - 생성객체 new Duck()
+   */
+  const test3 = () => {
+    const lee = new Duck('효리', '이');
+
+    console.log(Duck); // 생성자 함수
+    console.log(Duck.prototype); // 프로토타입객체
+
+    console.log(Duck.prototype.constructor === Duck);
+    console.log(lee.__proto__ === Duck.prototype);
+    console.log(lee);
+    
+  };
+
+  function A(){
+      this.name = 'Al pacino'
+      this.hello = function(){
+          console.log('hello');
+      }
+  }
+
+//   A의 속성 static
+  A.username = '홍길동';
+  A.hello = function(){
+      console.log('안녕');
+  }
+
+//   A.prototype의 속성
+  A.prototype.username = 'kh';
+  A.prototype.hello = function(){
+        console.log('hello kh');
+    }
+ 
+
+
+  /**
+   * static
+   */
+  const test4 = () => {
+    const x = new A();
+    x.hello();
+    console.log(x.name);
+
+    console.log(A.username);
+    A.hello();
+
+    console.log(A.prototype.username);
+    console.log(x.__proto__.username);
+
+    console.dir(A);
+    console.dir(A.prototype);
+    console.dir(x);
+ };
+  </script>
+  
+</body>
+</html>

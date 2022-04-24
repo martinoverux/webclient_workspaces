@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제-납품</title>
+</head>
+<body>
+    <fieldset>
+        <legend>납품자 정보</legend>
+        <ol>
+            <li><label for="personDeliver">납품자명(필수) :  </label>
+                <input type="text" id="personDeliver" name="personDeliver" required></li>
+                <br>
+            <li><label for="email">email(필수) : </label>
+                <input type="email" name="email" id="email" placeholder="answer@naver.com" required></li>
+                <br>
+            <li><label for="homepage">홈페이지 : </label>
+            <input type="homepage" name="homepage" id="homepage" value="http://"></li>
+            <br>
+            <li><label for="location">지역 : </label>
+                <select name="location" id="location">
+                    <option value="se">서울</option>
+                    <option value="bu" selected>부산</option>
+                    <option value="dae">대전</option>
+                    <option value="gwang">광주</option>
+                </select></li>
+        </ol>
+    </fieldset>
+
+    <fieldset>
+        <legend>납품 정보</legend>
+        <ul>
+            <li><label for="productName">상품명(필수) : </label>
+                <input type="text" id="productName" name="productName" required ></li>
+                <br>
+            <li><label for="deliveredCount">납품수량(필수) : </label>
+                <input type="number" name="deliveredCount" id="deliveredCount" min="100" step="1" placeholder="최소 100" required></li>
+                <br>
+            <li><label for="deliveredGrade">납품등급(필수) : </label>
+                <input type="range" name="deliveredGrade" id="deliveredGrade" min="0" max="100" step="5"required></li>
+                <br>
+            <li><label for="etc">기타사항 : </label>
+                <textarea name="etc" id="etc" cols="30" rows="2"></textarea></li>
+        </ul>
+
+    </fieldset>
+    <br>
+    <input type="submit" value="send message">
+</body>
+</html>

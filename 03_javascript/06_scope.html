@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 유효범위</title>
+</head>
+<body>
+    <h1>변수 유효범위</h1>
+    <button onclick="test1();">확인</button>
+    <script>
+        // 전역변수 : 모든 함수에서 사용 가능
+        const a = 100;
+        let b = '안녕';
+
+        // var로 선언된 전역변수 Window 전역객체의 속성으로 등록된다.
+        var x = true; 
+
+        function test1(){
+            console.log("a : ", a);
+            console.log("b : ", b);
+            console.log("x : ", x);
+
+        // 지역변수 : 함수/블럭 안에 선언된 변수
+        const c = 333;
+        console.log("c : ", c);
+        
+    }
+    // 전역에서 지역변수 호출
+    // console.log("c : ", c); Uncaught ReferenceError: c is not defined
+    
+    if(true) {
+        const d = 999;
+    }
+    // console.log("d : ", d); 06_scope.html:32 Uncaught ReferenceError: d is not defined
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지관련</title>
+</head>
+<body>
+    <h1>이미지관련</h1>
+    <img src="./images/flower1.PNG" style="width: 350px; height: 350px;">
+    <img src="../sample/image/flower2.PNG" style="width: 350px">
+    <img src="/sample/image/flower3.PNG" style="width: 350px">
+    <img src="http://192.168.219.100:5500//sample/image/flower3.PNG" style="width: 350px">
+    <img src="https://i.pinimg.com/originals/36/6c/a6/366ca63f3b8fd262eb13911e030d5666.jpg" style="width: 350px">
+    <img src="C:\Workspaces\webclient_workspace\sample\image\hyunta.jpg" style="width: 350px" alt="현타 온 개사진">
+   
+    <!--
+        src: 이미지파일 경로
+        - 상대 경로 : 현재 페이지 기준으로 파일검색
+            ./ : 현재 디렉토리(생략 가능)
+            ../ : 부모 디렉토리
+        - 절대 경로 : 루트 디렉토리 기준으로 파일을 검색
+            / 로 시작 | c:\ 로 시작 | http:// 로 시작
+            서버 이용 시 / -> http://192.168.219.100:5500/
+            http://192.168.219.100:5500/01_html/05_img.html
+            서버환경에서는 c:\ 이용불가
+       
+       
+        style 너비/높이 조정
+        너비/ 높이 하나만 지정 시 이미지의 원래 비율을 유지한 채로 변경
+   
+        alt 대체 텍스트 속성
+        - 이미지를 못 찾은 경우 화면에 표시할 텍스트
+        - 시각 장애인의 화면낭독기(스크린 리더)에 의해 해석될 텍스트
+    -->
+
+    <!-- 
+        절대 크기 단위 : px
+        상대 크기 단위 : % em (부모요소 기준으로 길이 측정)
+     -->
+
+    <!-- div>img[src=../sample/image/flower$.PNG]*5 -->
+    <div>
+        <img src="../sample/image/flower1.PNG" alt=" 꽃이미지" style="width:18%;">
+        <img src="../sample/image/flower2.PNG" alt=" 꽃이미지" style="width:18%;">
+        <img src="../sample/image/flower3.PNG" alt=" 꽃이미지" style="width:18%;">
+        <img src="../sample/image/flower4.PNG" alt=" 꽃이미지" style="width:18%;">
+        <img src="../sample/image/flower5.PNG" alt=" 꽃이미지" style="width:18%;">
+    </div>
+
+</body>
+</html>

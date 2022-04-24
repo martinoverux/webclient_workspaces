@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>객체</title>
+</head>
+<body>
+  <h1>객체</h1>
+  <button onclick="test1();">객체생성 - literal</button>
+  <button onclick="test2();">객체생성 - 생성자함수</button>
+  <script>
+  /**
+   * 객체란
+   * - (속성명 : 속성값)을 하나의 요소로 관리
+   * - 동일한 속성명으로 값을 대입하면, 이전 속성값은 대체된다.
+   * - 속성명 : 모든 타입이 가능하나, 키워드, 문자열 사용추천.
+   * - 속성값 : 모든 타입이 가능하다.
+   * 
+   * 객체생성 - literal
+   */
+  const test1 = () => {
+    const obj = {
+      id : 'honggd',
+      'name' : '홍길동',
+      married : true,
+      hobby : ['축구', '농구', '배구'],
+      pet : {
+        name : '구리구리',
+        breed : '푸들'
+      },
+      123 : 456,
+      'a-b' : 'ㅋㅋㅋ'
+    }
+    console.log(obj);
+
+    // 속성접근방식
+    // 1. dot-notation .속성명
+    // 2. bracket-notation [속성명]
+    console.log(obj.id);
+    console.log(obj.name);
+    console.log(obj.married);
+    console.log(obj.hobby);
+    console.log(obj.pet);
+    // console.log(obj.123); // Uncaught SyntaxError: missing ) after argument list
+    // console.log(obj.a-b); // Uncaught ReferenceError: b is not defined
+
+    console.log(obj['id']);
+    console.log(obj['name']);
+    console.log(obj['married']);
+    console.log(obj['hobby']);
+    console.log(obj['pet']);
+    console.log(obj[123]);
+    console.log(obj['a-b']);
+
+    // 없는 속성을 참조해도 오류나지 않고, undefined리턴
+    console.log(obj.abcdef);
+    obj.abcdef = 'ABCDEF'; // 속성 추가가능
+    console.log(obj.abcdef);
+
+  };
+
+  /**
+   * 생성자 호출
+   */
+  const test2 = () => {
+    const obj = new Object();
+
+    // 속성 추가
+    obj.name = '망고';
+    obj.weight = '0.3';
+    obj.price = 3000;
+    obj['origin'] = '필리핀';
+
+    // 값만 제거
+    obj.price = undefined;
+
+    // 속성 제거
+    delete obj.origin;
+
+    console.log(obj);
+  };
+  </script>
+
+  <button onclick="test3();">메소드</button>
+  <script>
+  /**
+   * 메소드 
+   * - 객체의 속성으로 등록된 함수를 메소드라고 한다.ㅣ
+   */
+  const test3 = () => {
+    const dog = {
+      name : '복실이',
+      run : function(){
+        // this용법4. 메소드 안의 this는 현재객체를 가리킨다.
+        // 메소드는 화살표 함수가 아닌 일반함수로 작성한다.
+        // 메소드
+        console.log(this.name + '가 달린다.');
+      },
+      jump(){
+        // 메소드 단축 문법
+        console.log(this.name + '가 점프한다.');
+      },
+      eat(food) {
+        console.log(`${this.name}가 ${food}를 먹는다.`);
+      }
+    };
+
+    console.log(typeof dog.run, dog.run);
+    // dot-notation
+    dog.run();  // 복실이가 달린다.
+    dog.jump(); // 복실이가 점프한다.
+    dog.eat('갈비'); // 복실이가 갈비를 먹는다.
+
+    // bracket-notation
+    dog['run']();
+    dog['jump']();
+    dog['run']('개껌');
+
+  };
+  </script>
+
+  <button onclick="test4();">반복처리</button>
+  <script>
+  /**
+   * 반복처리
+   * - 일반for문이 아닌 for..in문 사용(Enumerable속성이 true인 요소)
+   * - Object.keys(객체):[속성명,...]
+   */ 
+  const test4 = () => {
+    const obj = {
+      name : '청국장',
+      price : 8000,
+      ingredients : ['청국장', '소금', '파', '양파', '마늘'],
+      restaurant : {
+        name : '안동된장',
+        addr : "서울시 강남구 역삼동"
+      },
+      recipe(){
+        console.log(this);
+        console.log(this.ingredients); // undefined
+        console.log('물을 끓인다.');
+        console.log(this.ingredients[0] + '를 넣는다.');
+        console.log(this.ingredients[1] + '를 넣는다.');
+      }
+    };
+
+    // Losing this 확인
+    // obj.recipe();
+
+    // const foo = obj.recipe;
+    // // foo(); // this가 현재객체가 아닌 Window -> Losing this!
+    // foo.call(obj); // this를 obj로 바인딩
+    
+
+
+    // for.. in
+    // for(let key in obj){
+    //   if((typeof obj[key]) !== 'function')
+    //     console.log(key, obj[key]);
+    //   else {
+    //     console.log(key);
+    //     obj[key]();
+    //   }
+    // }
+
+    // Object.key()
+    // const keys = Object.keys(obj);
+    // console.log(typeof keys, keys);
+    // keys.forEach((key, index) => {
+    //   const value = obj[key];
+    //   console.log(key, value);
+    // });
+
+    // Object.values()
+    const values = Object.values(obj);
+    console.log(typeof values, values);
+    values.forEach((value, index) => {
+      // console.log(value);
+
+      // 배열인 경우, 모든 요소를 /로 연결해 출력
+      // 함수인 경우, 호출처리
+      // 그외는 단순 출력
+      switch(typeof value){
+        case "object": 
+          if(value.length){
+            // 배열
+            console.log(value.join('/'));
+          }
+          else{
+            // 객체
+            console.log(value);
+          }
+          break;
+        case "function": 
+          value.call(obj); // this를 명시적으로 바인딩
+          break;
+        default: 
+          console.log(value);
+      }
+
+
+    });
+
+  };
+  </script>
+
+<fieldset>
+    <legend>@실습문제 : 게임</legend>
+    <button onclick="start();">게임시작</button>
+    <button onclick="end();">게임종료</button>
+    <table id="info">
+        <tbody>
+            <tr>
+                <th>게임명</th>
+                <td id="gameTitle"></td>
+            </tr>
+            <tr>
+                <th>시작시각</th>
+                <td id="gameStart"></td>
+            </tr>
+            <tr>
+                <th>소요시간</th>
+                <td id="gameUptime"></td>
+            </tr>
+            <tr>
+                <th>종료시각</th>
+                <td id="gameEnd"></td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+<script>
+    /**
+     * @실습문제 : game
+     * - start함수 사용자로부터 게임명을 입력받고 게임시작.
+     *      -#gameStart 현재시각 정보를 hh:mm:ss 형식으로 출력
+     *      -#gameUptime 게임 소요시각 정보를 hh:mm:ss 형식으로 출력. setInterval 사용해서 1초마다 출력(intervalId)
+     * - end함수 게임 종료
+     *      - #gameEnd 현재 시각정보를 hh:mm:ss 형식으로 출력
+     *      - setInterval을 종료
+     */
+     const start = () => {
+    // 0. 초기화
+    reset();
+    // 1.게임명 입력받기
+    const title = prompt("게임명을 입력하세요.", "LOL");
+    // 2.game객체 startUp 메소드 호출
+    game.startUp(title);
+  };
+  const end = () => {
+    // 1.game객체 shutDown 메소드 호출
+    game.shutDown();
+  };
+  const reset = () => {
+    document.querySelectorAll(".info").forEach((td) => td.innerHTML = "");
+    // 아직 중지되지 않은 interval 함수를 종료
+    !intervalId && clearInterval(intervalId);
+  }
+  let intervalId; // interval종료를 위한 id값 변수
+
+  const game = {
+    title: undefined,
+    startUp(title){
+      this.title = title;
+      this.info.start = Date.now();
+      // 3. #info테이블에 게임정보기록
+      gameTitle.innerHTML = this.title;
+      gameStart.innerHTML = displayTime(new Date(this.info.start));
+      // 4. 소요시간 interval처리
+      intervalId = setInterval(() => {
+        gameUptime.innerHTML = displayUptime(Date.now() - this.info.start);
+      }, 1000);
+    },
+    shutDown(){
+      // 1. 종료시각 기록
+      this.info.end = Date.now();
+      gameEnd.innerHTML = displayTime(new Date(this.info.end));
+      // 2. intervalId 정지
+      clearInterval(intervalId);
+    },
+    info : {
+      start : undefined, // 게임 시작 시각(millis)
+      end : undefined // 게임 종료 시각(millis)
+    }
+  };
+  const f = (n) => (n < 10) ? "0" + n : n;
+  /**
+   * 두 날짜 데이터의 시간차이(millis)를 인자로 받아서 시:분:초 형식으로 변환하는 함수
+   */
+  const displayUptime = (millis) => {
+    const sec = Math.trunc(millis / 1000); // 밀리초 - 초 변환
+    const hh = f(Math.trunc(sec / (60 * 60))); // 버림(전체초 / (60초 * 60분)) -> 시간
+    const mm = f(Math.trunc(sec % (60 * 60) / 60)); // 버림((나머지초) / 60초) -> 분
+    const ss = f(sec % (60 * 60) % 60); // 버림(나머지초 % 60초) -> 초
+    return `${hh}:${mm}:${ss}`;
+  };
+  const displayTime = (date) => {
+    
+    const hh = f(date.getHours());
+    const mm = f(date.getMinutes());
+    const ss = f(date.getSeconds());
+    return `${hh}:${mm}:${ss}`;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자료형</title>
+</head>
+<body>
+    <h1>자료형</h1>
+    <button onclick="test1();">test1</button>
+    <script>
+        /*
+            자료형
+        */     
+        
+        function test1() {
+            // 변수 선언 키워드 let(변수) / const(상수) / (var)
+             let a;  // 자료형이 아직 지정되지 않음
+
+             // 값대입 : 값을 통해 자료형 지정 - Dynamaic Typing
+             a = "안녕";
+            console.log(typeof a, a);
+
+            // 자료형
+            // string 문자열 '' ""
+            const str = "abc";
+            console.log(typeof str, str); // strin abc
+            
+            // number
+            const num = 123;
+            console.log(typeof num, num); // number 123
+
+            // boolean
+            const bool = false;
+            console.log(typeof bool, bool); // boolean false
+
+            // object
+            const obj = {
+                name : '홍길동',
+                n: 123.456,
+                married: true,
+                hobby : ['축구', '농구'],
+                foo : function() {
+                    console.log('obj.foooooooooooooooooooooooooooooo');
+                },
+                friend : {
+                    name : '고길동'
+                }
+            }; 
+            console.log(typeof obj, obj);
+            console.log(obj.hobby);
+            console.log(obj.foo);
+            console.log(obj.friend);
+
+            const today = new Date();
+            console.log(typeof today, today); // object Wed Apr 13 2022 10:47:02 GMT+0900 (한국 표준시)
+
+            const arr = [1, 2, 3];
+            console.log(typeof arr, arr);
+            console.log(arr[0], arr[1], arr[2]);
+
+            // function
+            function foo() {
+                console.log('foooooooooooooooooooooooooooooooooooooooo');
+            }
+            console.log(typeof foo, foo)
+            foo(); // 함수 호출
+
+            // undefined
+            let h;
+            console.log(typeof h, h); // undefiend undefined
+
+            let m = 123;
+            m= undefined;
+
+            console.log(typeof m, m); // undefiend undefined
+
+
+        }
+    </script>
+</body>
+</html>

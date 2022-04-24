@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>position</title>
+</head>
+<body>
+  <h1>position</h1>
+  <!-- 
+    position 문서내에서 요소 배치와 관련된 속성
+    - static : 기본값. 문서에 정의된 대로 화면배치. offset값 무시.
+    - relative : 문서배치는 static과 동일하나 offset 적용가능
+    - absolute : 가장 가까운 static이 아닌 조상요소 기준으로 offset을 적용
+    - fixed : 브라우져 viewport 기준으로 offset을 적용
+      - sticky : 기본적으로 relative처럼 작동하다 특정offset에 다다르면 fixed처럼 작동한다.
+  -->
+  <h2 class="position-sticky">sticky</h2>
+  <h2>static</h2>
+  <!-- div.outer>.first+.second+.third -->
+  <div class="outer">
+    <div class="first"></div>
+    <div class="second"></div>
+    <div class="third"></div>
+  </div>
+
+  <h2>relative</h2>
+  <div class="outer">
+    <div class="first"></div>
+    <div class="second position-relative"></div>
+    <div class="third position-relative"></div>
+  </div>
+
+  <h2 style="margin-top: 200px;">absolute</h2>
+  <div class="outer position-relative">
+    <div class="first"></div>
+    <div class="second position-absolute"></div>
+    <div class="third position-absolute"></div>
+  </div>
+
+  <h2>fixed</h2>
+  <div class="fourth position-fixed"></div>
+
+  <style>
+  .position-fixed {position: fixed;}
+  .position-relative {position: relative;}
+  .position-absolute {position: absolute;}
+  .position-sticky {
+    position: sticky;
+    top: 0px;
+    background-color: yellowgreen;
+    z-index:9999;
+  }
+  .fourth {
+    width: 100px;
+    height: 100px;
+    background-color: tomato;
+    bottom: 50px;
+    right: 50px;
+  }
+
+
+  .outer {
+    background-color: lightgray;
+    border: 1px solid #000;
+  }
+  .first {
+    width: 300px;
+    height: 300px;
+    background-color: thistle;
+  }
+  .second {
+    width: 200px;
+    height: 200px;
+    background-color: violet;
+    top: 50px;
+    left: 50px;
+  }
+  .third {
+    width: 100px;
+    height: 100px;
+    background-color: magenta;
+    top: 100px;
+    left: 100px;
+  }
+  </style>
+
+
+
+
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

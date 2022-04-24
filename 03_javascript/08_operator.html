@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>연산자</h1>
+    <button onclick="test1();">대입연산 시 ||</button>
+    <button onclick="test2();">짧은 조건문 && ||</button>
+    <div id="exist"></div>
+    <div id="existOrNot"></div>
+    <script>
+        /**
+         * 대입연산 시 ||
+         */
+        function test1(){
+            // a || b -> a가 존재하면 a를 사용, a가 존재하지 않으면 b를 사용.
+            // 둘 다 존재하지 않으면 object 타입의 null 반환
+            const elem = document.querySelector("#existOrNot") || document.querySelector("exist");
+            console.log(typeof elem, elem);
+        }
+
+        /**
+         * 짧은 조건문
+         * -- a && b a가 true로 평가될 때 b를 실행하라.
+         * -- a || b ark false로 평가될 때 b로 실행하라.
+         * 
+         * 대입문은 괄호로 감싸서 처리할 것.
+         * return문은 우항에 사용 불가.
+         */
+        function test2() {
+            const num = Number(prompt("정수를 입력하세요."));
+            // 홀수일 때만 "축하합니다." alert
+            // if(num % 2 != 0) alert("축하합니다.")
+            // num % 2 != 0 && alert("축하합니다.")
+            num % 2 == 0 || alert("축하합니다.")
+        }
+    </script>
+</body>
+</html>

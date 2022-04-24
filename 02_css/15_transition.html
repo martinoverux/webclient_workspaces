@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transition</title>
+</head>
+<body>
+    <h1>transition</h1>
+    <div class="box"></div>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: tomato;
+            border: 2px solid #000;
+            transition-duration: 1s;
+            transition-property: transform;
+            transition-delay: 0s; /*지연시간*/
+            transition-timing-function: ease;
+        }
+        .box:hover {
+            background-color: greenyellow;
+            /* width: 200px;
+            height: 200px; */
+            transform:translate(250%, 0%);
+        }
+    </style>
+
+    <h2>Card</h2>
+    <div class="tile">
+        <h1>Hello World</h1>
+        <h2 class="text-transition">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+        <p class="text-transition">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti saepe repellat exercitationem et, id totam, impedit cum eligendi fugiat, unde architecto. Id totam expedita consectetur amet aliquid molestiae aliquam voluptate?</p>
+    </div>
+    <style>
+        .tile {
+            width: 380px;
+            height: 380px;
+            margin: 10px;
+            padding: 30px;
+            background-color: #99aeff;
+            cursor: pointer; /*손가락 모양*/
+            box-shadow: 0px 35px 77px -17px rgba(0, 0, 0, .4);
+            color: white;
+            overflow: hidden;
+        }
+        
+        .tile h1 {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, .3);
+        }
+
+        .tile h2 {
+            font-weight: 100;
+            font-style: italic;
+            transform: translateX(-380px);
+        }
+
+        .tile p {
+            line-height: 27px;
+            transform: translateX(380px);
+            opacity: .7;
+            transition-delay: .2s;
+        }
+        .text-transition {
+            transition: all .6s;
+        }
+
+        .tile:hover .text-transition {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    </style>
+
+    <div class="wrapper">
+        <img src="../sample/image/hyunta.jpg" alt="">
+    </div>
+    <style>
+        .wrapper {
+            border: 1px solid gray;
+            width: 300px;
+            height: 280px;
+            overflow: hidden;
+        }
+        .wrapper img {
+            width: 100%;
+            transition: .3s;
+        }
+        .wrapper:hover img {
+            transform: scale(1.1);
+        }
+
+
+    </style>
+</body>
+</html>

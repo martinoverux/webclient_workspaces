@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Dongle:wght@300;400;700&family=Gamja+Flower&family=Jua&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+    <title>글꼴관련</title>
+
+</head>
+<body>
+    <h1>글꼴관련</h1>
+    <div>
+        <p id="p1">abcdefg 1234567890 가나다라마바사</p>
+        <p id="p2">abcdefg 1234567890 가나다라마바사</p>
+        <p id="p3">abcdefg 1234567890 가나다라마바사</p>
+        <p id="p4">abcdefg 1234567890 가나다라마바사</p>
+        <p id="p5">abcdefg 1234567890 가나다라마바사</p>
+        <p id="p6">abcdefg 1234567890 가나다라마바사</p>
+  
+    </div>
+    <style>
+        /* 
+        cursive 필기체
+        monospaced 동일간격 폰트
+        serif 글자 끝 장식이 있는 폰트
+        sans-serif 글자 끝 장식이 없는 폰트
+        */
+        #p1 {
+            font-family: 궁서체, 휴먼모음T, 고딕체;
+        }
+
+        #p2 {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        #p3 {
+            font-family: 'Dongle', sans-serif;
+        }
+
+        #p4 {
+            font-family: 'Gamja Flower', cursive;
+        }
+
+        #p5{
+            font-family: 'Jua', sans-serif;
+        }
+
+        #p6 {
+            font-family: 'Nanum Gothic Coding', monospace;
+        }
+
+    </style>
+
+    <!-- 
+        selector {font : font-style font-variant font-weight font-size/line-height font-family;}
+     -->
+    <div id ="wrapper">
+        <ul>
+            <li>절대단위 px</li>
+            <li>상대단위 em</li>
+            <li>상대단위 rem</li>
+            <li>상대단위 %</li>
+        </ul>
+    </div>
+    <style>
+        :root {font-size: 16px;}
+        div#wrapper {font-size: 20px;}
+        div#wrapper li:first-of-type {font-size : 32px;}
+        div#wrapper li:nth-of-type(2) {font-size : 2em;}
+        div#wrapper li:nth-of-type(3) {font-size : 2rem;}
+        div#wrapper li:last-of-type {font-size : 200%;}
+    </style>
+
+    <div id="container">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus necessitatibus recusandae blanditiis molestias eligendi vitae. Velit quos itaque numquam temporibus ab, ut, eaque cum suscipit fugiat aspernatur dolores, odit non?</p>
+        <p>Dicta deleniti ea quisquam non harum possimus sit quibusdam ducimus et, repudiandae cumque. Error suscipit tenetur nostrum aliquid voluptas ad voluptate. Pariatur fugit ipsum eaque, odio eos voluptatibus ullam repellendus!</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et, quis corporis maxime laboriosam modi id aliquam obcaecati officia harum, consequatur praesentium hic dicta in alias consequuntur dolor culpa. Voluptas, eligendi.</p>
+    </div>
+    <style>
+        #container p:first-child {
+            /* font font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; */
+            font-weight: bold /*light(100) ~ normal(400) ~ bold(700) | 100 ~ 700 */
+        }
+
+        #container p:nth-child(2) {
+            font-style: italic;
+            line-height: 2em;
+        }
+
+        #container p:last-child {
+            font: italic 700 24px 'Helvetica Neue';
+        }
+    </style>
+
+
+</body>
+</html>

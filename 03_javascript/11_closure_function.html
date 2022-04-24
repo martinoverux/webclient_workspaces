@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>클로져 함수</title>
+</head>
+<body>
+    <h1>클로져 함수</h1>
+    <button onclick="test1();">자유변수</button>
+    <button onclick="test2();">클로져</button>
+    <script>
+        /**
+         * 자유변수 free variable
+         * - 함수 내에서 지역변수로 정의되지 않는 변수
+         */
+        const test1 = () => {
+            const hi = "안녕";
+            /**
+             * say 함수의 지역변수
+             * - greeting 
+             * - name 매개변수
+             */
+            const say = (name) => {
+                const greeting = `${hi}, ${name}야~`;
+                alert(greeting);
+            };
+            say('영희');
+        };
+
+        /**
+         * Closure
+         * - 참조하는 환경을 가진 함수
+         * - 자유 변수를 가지고 외부로부터 닫힌 함수
+         */
+        const test2 = () => {
+            const num = 200;
+            const foo = yoo();
+            console.dir(foo);
+            foo(); // 100
+        }
+
+        function yoo(){
+            const num = 100;
+            return () => {
+                console.log(`num = ${num}`); 
+            }
+        }
+         
+    </script>
+
+    <br>
+
+    <button onclick="test3();">global counter</button>
+    <span id="global-cnt-display">0</span>
+    
+    <br>
+    
+    <button onclick="test4();">closure counter</button>
+    <span id="closure-cnt-display">0</span>
+
+    <script>
+        /**
+         * 전역변수 카운터
+         */
+        let cnt = 0;
+        const test3 = () => {
+            document.querySelector("#global-cnt-display").innerHTML = ++cnt;
+        };
+
+        /**
+         * 클로져 카운터
+         */
+        const closureCounterMaker = () => {
+            let cnt = 0;
+            return () => {
+                document.querySelector("#closure-cnt-display").innerHTML = ++cnt;
+            };
+        };
+        const test4 = closureCounterMaker();
+    </script>
+    
+    <br>
+
+    <input type="number" id="num">
+    <button onclick="test5();">+</button>
+    <script>
+        /**
+         * 사용자 입력값을 누적해서 덧셈처리해주는 클로져 함수를 작성
+         */
+        
+         const closureSumMaker = () => {
+             let sum = 0;
+             return () => {
+                 sum += Number(num.value);
+                 console.log(sum);
+                 num.value = '';
+             }
+         }
+         const test5 = closureSumMaker();
+    </script>
+
+    <button onclick="aoo()();">aoo</button>
+    <button onclick="boo()();">boo1</button>
+    <button onclick="boo()(999);">boo2</button>
+    <button onclick="coo(3)(5);">coo1</button>
+    <button onclick="coo()(5);">coo2</button>
+    <script>
+        const a = 1;
+        const aoo = () => {
+            const a = 100;
+            return () => console.log(a); // 100
+        }
+
+        const b = 9;
+        const boo = () => {
+            const b = 99;
+            return (b) => console.log(b); //error 999
+        }
+
+        const coo = (c) => {
+            return (n) => {
+                console.log(c * n);  // 15 error
+            }
+        }
+    </script>
+</body>
+</html>

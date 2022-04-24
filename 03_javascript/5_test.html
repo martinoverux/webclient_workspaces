@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //1
+    let z = 50;
+    (() => {
+        let z = 55;
+        z += 45;
+        console.log(`z = ${z}`); // 100
+    })();              
+    console.log(`z = ${z}`);   // 50
+    
+    //2
+    let y = 99;
+    (() => {
+        let x = 100;
+        let y = 9;
+        z = 1;
+        console.log(`x + y + z = ${x + y + z}`); // 110
+    })();
+    console.log(`y + z = ${y + z}`);    // 100
+    // console.log(`x + y + z = ${x + y + z}`);  // 오류(x값은 전역변수가 아님)
+    
+    //3
+    for (let i = 1; i <= 10; i++) {
+        console.log(i); // 1~10까지 출력  // 1 2 3 4 5 6 7 8 9 10
+    }
+    (() => {
+        // console.log(`i = ${i}`);  // 오류(변수 i는 전역변수가 아님)
+    })();
+    
+    /**
+     * var 변수 유효범위(scope)는 block-scope가 아니라 function-scope
+     * function 안에서만 유효. function 바깥의 block은 모두 무시
+     * 전역에 선언된 var는 전역객체 window 속성으로 등록된다.
+     */
+    for (var j = 1; j <= 10; j++) {
+        console.log(f); // 1~10까지 출력  // 1 2 3 4 5 6 7 8 9 10
+    }
+    (() => {
+    })();
+
+    //4 closer 예습문제
+    function foo(){
+        const num = 100;
+        return () => {
+            console.log(`num = ${num}`); 
+        }
+    }
+    const num = 200;
+    const too = foo();
+    too();  // 100
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트관련</title>
+</head>
+<body>
+    <h1>텍스트관련</h1>
+    <div id="wrapper1">
+        <p id="color1">컬러명</p>
+        <p id="color2">16진수</p>
+        <p id="color3">rgb</p>
+        <p id="color4">hsl</p>
+    </div>
+    <style>
+        #color1 {color: darkcyan}
+        #color2 {color: #008b8b}
+        #color3 {
+            /* color: rgb(0, 139, 139); */
+            color: rgb(0 139 139 / 50%);
+            color: rgba(0, 139, 139, 0.5);
+        }
+        #color4 {color: hsl(180, 100%,27%)} /*hue(색상), saturation(채도), lightness(명도)*/
+    </style>
+
+    <div id="wrapper2">
+        <ul>
+            <li id="deco1">안녕하세요</li>
+            <li id="deco2"><a href="https://www.naver.com">네이버</a></li>
+        </ul>
+    </div>
+    <style>
+        #deco1 {text-decoration: underline red solid;}
+        #deco2 a {text-decoration: none;}
+        #deco2 a:hover {text-decoration: underline;}
+    </style>
+
+    <div id="wrapper3">
+        <p id="shadow">안녕하세요</p>
+    </div>
+    <style>
+        /* 가로 offset, 세로 offset, spread, color */
+        #shadow{text-shadow: 2px 2px 3px grey;}
+    </style>
+
+    <div id="wrapper4">
+        <!-- (span#shadow$.shadow-group{HTML5})*4 -->
+        <span id="shadow1" class="shadow-group">HTML5</span><br>
+        <span id="shadow2" class="shadow-group">HTML5</span><br>
+        <span id="shadow3" class="shadow-group">HTML5</span><br>
+        <span id="shadow4" class="shadow-group">HTML5</span><br>
+    </div>
+    <style>
+        #wrapper4 {background-color: #000;}
+        .shadow-group {
+            color: #fff; font-size: 100px ;
+        }
+        #shadow1{
+            color:orangered ;
+            text-shadow: 4px 4px 0px orange;
+        }
+        #shadow2{
+            color:white ;
+            text-shadow: 0px 1px 20px white;
+        }
+        #shadow3{
+            color:white;
+            text-shadow: 0px 1px 20px greenyellow;
+        }
+        #shadow4{
+            color:black;
+            text-shadow: 0px 0px 4px #ccc,
+                 0px -5px 4px #ff3,
+                 2px -10px 6px #fd3,
+                 -2px -15px 11px #f80,
+                 2px -19px 18px #f20;
+        }
+    </style>
+
+    <div id="wrapper5">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus perspiciatis, sequi nobis omnis quidem iste mollitia provident facere? Perspiciatis iure vero repellat magni magnam? Molestias neque ullam ab at autem!</p>
+    </div>
+    <style>
+        #wrapper5{
+            border: 2px solid black;
+            background-color: lightgray;
+            margin-top: 30px;
+            width: 300px;
+            white-space: nowrap; /*줄바꿈 속성*/
+            /* overflow: hidden; */
+            overflow-x: scroll;
+        }
+    </style>
+</body>
+</html>

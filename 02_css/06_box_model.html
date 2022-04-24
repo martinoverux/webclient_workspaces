@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+</head>
+<body>
+    <h1>박스모델</h1>
+    <!-- 
+        margin - 다른 요소와의 거리(여백)
+            border - 경계 영역
+                padding - border와 content 사이의 영역(여백)
+                    content - 내용 width/height 저장
+     -->
+    <div class="box">안녕</div>
+    <style>
+        .box {
+            border: 3px solid #000;
+            padding: 10px 10px 10px 10px;
+            margin: 15px 15px 15px 15px;
+            width: 200px;
+            height: 200px;
+            background-color: violet;
+        }
+    </style>
+
+    <h2 style="margin-bottom: 50px;">마진겹침현상</h2>
+    <!-- 
+        인접한 두 요소의 마진이 다른 경우, 마진이 큰 값으로 처리
+     -->
+     <h2 style="margin-top: 30px;">마진겹침현상</h2>
+
+</body>
+</html>

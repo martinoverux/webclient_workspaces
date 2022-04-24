@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상속 & 클래스</title>
+</head>
+<body>
+  <h1>상속 & 클래스</h1>
+  <button onclick="test1();">상속</button>
+  <button onclick="test2();">call | apply | bind</button>
+  <script>
+  /**
+   * prototype을 통한 상속구현
+   */
+  const test1 = () => {
+    const books = [
+      new Novel('매트릭스', 35000, .15, '연애'),
+      new Novel('오라클 완전정복', 30000, .2, 'SF'),
+      new Novel('네오클래식', 15000, undefined, '심리'),
+      new Poet('시밤', 13000, .1, '서사'),
+      new Poet('꽃을 보듯 너를 본다', 13000, .1, '서정'),
+    ];
+    books.forEach((book) => console.log(book));
+
+  };
+
+  // 부모 생성자 함수
+  function Book(title, price, discountRate = .05){
+    this.title = title;
+    this.price = price;
+    this.discountRate = discountRate;
+  }
+  Book.prototype.getSalePrice = function(){
+    return this.price - (this.price * this.discountRate);
+  }
+  Book.prototype.toString = function(){
+    return `제목 : ${this.title}, 판매가 : ${this.getSalePrice()}원(정가 : ${this.price}원)`;
+  }
+
+  // 자식 생성자함수
+  // 1. 부모생성자함수 호출 - 부모생성자.apply(자식객체)
+  // 2. 자식.prototype으로 - 부모.prototype 지정 (Object.create)
+  // 3. 새로 생성된 부모.prototype객체에 생성자함수 재지정
+  function Novel(title, price, discountRate, type){
+    // 1. 부모생성자함수 호출 - 부모생성자.apply(자식객체)
+    Book.apply(this, [title, price, discountRate]);
+    this.type = type;
+  }
+  // 2. 자식.prototype으로 - 부모.prototype 지정 (Object.create)
+  // Object.create 전달한 객체를 cloning해서 새로운 객체를 반환
+  Novel.prototype = Object.create(Book.prototype);
+
+  // 3. 새로 생성된 부모.prototype객체에 생성자함수 재지정
+  Novel.prototype.constructor = Novel; // Book -> Novel
+
+  function Poet(title, price, discountRate, type){
+    // Book.apply(this, [title, price, discountRate]);
+    Book.call(this, title, price, discountRate);
+    this.type = type;
+  }
+  Poet.prototype = Object.create(Book.prototype);
+  Poet.prototype.constructor = Poet;
+
+
+  /**
+   * this객체를 바인딩하면서 함수호출
+   * - call : 인자를 낱개로 전달
+   * - apply : 인자를 배열로 전달
+   * 
+   * this객체를 바인딩한 함수 리턴
+   * - bind
+   */
+  const test2 = () => {
+    const foo = function(a, b){ 
+      console.log(this.id, a, b) 
+    };
+    foo(); // undefined - window.id
+
+    // this를 재지정
+    const obj = {
+      id : 'qwerty1234'
+    };
+    foo.call(obj, 10, 20);
+    foo.apply(obj, [10, 20]);
+
+    const bar = foo.bind(obj); // 호출하지 않고, this바인딩후에 리턴
+    bar();
+  };
+  </script>
+
+  <button onclick="test3();">class</button>
+  <button onclick="test4();">class 상속</button>
+  <script>
+  /**
+   * class
+   * - 생성자함수의 Syntactic Sugar
+   */
+  const test3 = () => {
+    const hong = new Person('홍길동', '01012341234');
+    console.log(hong);
+
+    console.log(typeof Person, Person); // function
+
+    hong.sayHi();
+    hong.callMe();
+
+    // static자원
+    console.log(Person.x);
+    Person.y();
+  };
+
+  class Person {
+    // Person 생성자함수 속성으로 작성
+    static x = 100;
+    static y = function(){
+      console.log('yyyyyyyyyyyyyyyyyyyyyyy');
+    }
+
+    // 생성자함수 : new Person() 호출될 함수
+    constructor(name, phone){
+      this.name = name;
+      this.phone = phone;
+    }
+
+    // Person.prototype에 작성 : 메소드단축문법
+    sayHi(){
+      console.log(`안녕하세요, ${this.name}입니다.`);
+    }
+
+    // 현재객체에 기록
+    callMe = function(){
+      console.log(`제 번호는 ${this.phone}입니다. 전화주세요~`);
+    };
+
+  }
+
+  class Dev extends Person {
+    constructor(name, phone, lang){
+      super(name, phone); // 부모생성자 호출
+      this.lang = lang;
+    }
+
+    /**
+     * Override
+     */
+    sayHi(){
+      super.sayHi(); // 부모 sayHi호출!
+      console.log(`저는 ${this.lang}개발자 입니다.`);
+    }
+
+  }
+
+  /**
+   * 클래스 상속
+   */
+  const test4 = () => {
+    const devs = [
+      new Dev('홍길동', '01012341324', 'js'),
+      new Dev('신사임당', '01033334444', 'java'),
+      new Dev('장영실', '01078787878', 'c++'),
+    ];
+    devs.forEach((dev, index) => {
+      // console.log(index, dev);
+      // dev.sayHi();
+      // dev.callMe();
+      
+      // 오버라이드
+      dev.sayHi();
+    });
+  };
+  </script>
+
+  
+
+  
+</body>
+</html>

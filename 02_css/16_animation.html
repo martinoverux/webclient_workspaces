@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+</head>
+<body>
+    <h1>animation</h1>
+    <div class="box"></div>
+    <hr>
+    <img class="dog-img" src="../sample/image/hyunta.jpg" alt="">
+    <style>
+        .dog-img {
+            width: 100px;
+            border-radius: 50%;
+            /* animation-name: myframes;
+            animation-duration: 1s;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-delay: 3s; */
+            animation: myframes 1s 3s infinite alternate;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            border: 1px solid #000;
+            margin: 100px;
+        }
+        body:hover .box{
+            animation-name: myframes;
+            animation-duration: 2s;
+            animation-direction: alternate;
+            /* animation-iteration-count: infinite; */
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        /* translate 시작점 대비 상대 위치로 작성할 것 */
+        @keyframes myframes {
+            25% {
+                transform: translate(100px, 0);
+            }
+
+            50% {
+                transform: translate(100px, 100px);
+            }
+
+            75% {
+                transform: translate(0px, 100px);
+            }
+
+            100% {
+                transform: translate(0px, 200px);
+            }
+        }
+
+    </style>
+</body>
+</html>

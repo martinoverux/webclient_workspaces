@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS실습문제-box-shadow</title>
+    <style>
+        img {
+            width: 500px; 
+            height: 200px;
+            margin: 10px;
+        }
+        .image {
+            background-color: gainsboro;
+            width: 1582px;
+            height: 213px;
+            padding: 50px 70px;
+            margin: 0 auto;
+        }
+        img:hover {
+            box-shadow: 0px 0px 15px 5px gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지에 마우스 hover 그림자 효과 만들기</h1>
+    <hr>
+    <div class="image" >
+        <img src="/sample/image/flower1.PNG" alt="꽃이미지1">
+        <img src="/sample/image/flower2.PNG" alt="꽃이미지2">
+        <img src="/sample/image/flower3.PNG" alt="꽃이미지3">
+    </div>
+</body>
+</html>

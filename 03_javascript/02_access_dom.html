@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM에 접근하기</title>
+</head>
+<body>
+    <h1>DOM에 접근하기</h1>
+    <!-- 
+        DOM Document Object Model
+        - html의 모든 요소는 document 객체 하위에서 계층구조로 관리된다.
+     -->
+
+     <div>
+        <ul>
+            <li id="hw1" class="group1" title="HelloWorld1">HelloWorld1</li>
+            <li id="hw2" class="group1">HelloWorld2</li>
+            <li id="hw3" class="group2" title="HelloWorld3">HelloWorld3</li>
+            <li id="hw4" class="group2">HelloWorld4</li>
+            <li id="hw5" class="group1 group2">HelloWorld5</li>
+        </ul>
+    </div>
+
+    <div>
+        <input type="text" name="username" id="username">
+        <br>
+        <input type="range" name="point" id="point" min="0" max="100" value="0" oninput="test6();">
+        <span id="pointView">0</span>점
+        <br>
+        <input type="checkbox" name="fruit" id="apple" value="사과">
+        <label for="apple">사과</label>
+        <input type="checkbox" name="fruit" id="banana" value="바나나">
+        <label for="banana">바나나</label>
+        <input type="checkbox" name="fruit" id="peach" value="복숭아">
+        <label for="peach">복숭아</label>
+    </div>
+
+
+    <button onclick="test1();">getElementById</button>
+    <button onclick="test2();">getElementsByTagName</button>
+    <button onclick="test3();">getElementsByClassName</button>
+    <button onclick="test4();">getElementsByName</button>
+    <button onclick="test5();">사용자입력값 출력</button>
+    <button onclick="test7();">querySelector</button>
+    <button onclick="test8();">querySelectorAll</button>
+    
+    <script>
+        function test1() {
+            const hw1 = document.getElementById('hw1');
+            console.log(typeof hw1, hw1);
+            console.dir(hw1);
+            console.log('id : ', hw1.id);
+            console.log('class : ', hw1.className);
+            console.log('title : ', hw1.title);
+            console.log('innerHTML : ', hw1.innerHTML);
+
+            const notExist = document.getElementById("dasfasdfawsfs");
+            console.log(typeof notExist, notExist); // object null
+            // 타입은 object인데, 값이 없는 경우 null
+            console.log(notExist.id); // Uncaught TypeError: Cannot read properties of null (reading 'id')
+            console.log(12345);
+        }
+
+        /**
+         * getElementsByTagName
+         * - 해당 요소를 포함하는 배열 객체(가짜)를 반환
+         */
+        function test2() {
+            const list = document.getElementsByTagName("li");
+            // console.log(typeof list, list);
+
+            for(let i = 0; i < list.length; i++){
+                const li = list[i];
+                console.dir(li);
+                console.log(li.id, li.className, li.innerHTML);
+                li.style.backgroundColor = 'hotpink';
+                li.style.color = 'white';
+                li.style.fontSize = '32px';
+            
+            }
+        }
+
+        /**
+         * getElementsByClassName
+         * - 해당 클래스를 가진 태그 객체를 배열(가짜)로 반환
+         */
+        function test3() {
+            const group1 = document.getElementsByClassName('group1');
+            // console.log(typeof group1, group1);
+
+            for(let i = 0; i < group1.length; i++){
+                const li = group1[i];
+                li.style.textDecoration = "underline";
+            
+            }
+        }
+
+        /*
+        * getElementsByName
+        * - 해당 name 값을 가진 input/selet태그를 배열(가짜)로 반환
+        * - 매칭되는 태그가 없을 시 빈 배열을 반환
+        */
+        function test4() {
+            const fruits = document.getElementsByName('fruit');
+            console.log(typeof fruits, fruits);
+            let str = "";
+            for(let i = 0; i < fruits.length; i++){
+                const fruit = fruits[i];
+                // console.dir(fruit);
+                // console.log("%s : %s", fruit.id, fruit.checked); // getter로 사용
+                // fruit.checked = true; // setter로 사용
+                
+                if(fruit.checked = true){
+                    str += fruit.value + " ";
+                }
+            }
+            alert(str);
+        }
+
+        /**
+         * @실습문제
+         * -input#username의 사용자 입력값을 alert로 출력
+         */ 
+         function test5() {
+            const inputValue = document.getElementById('username');
+            alert(inputValue.value);
+        }
+
+    //     function test5(){
+    //     const input = document.getElementsByName("username");
+    //     console.log(typeof input, input);
+    //     let str = "";
+    //     for(let i = 0; i < input.length; i++){
+    //         const li = input[i];
+    //         str = li.value;
+    //     }
+    //     alert(str);
+    // }
+
+        /*
+        * input#point input이벤트핸들러(리스너)
+        * - A 사용자값 값입력(핸들조정)
+        * - B span#pointView 값 표시 (test6함수)
+        */
+        function test6() {
+            const point = document.getElementById('point');
+            const pointValue = point.value;
+
+            const pointView = document.getElementById('pointView');
+            pointView.innerHTML = pointValue;
+        }
+        
+        /**
+         * querySelector
+         * - css 선택자를 통해 DOM 요소를 접근할 수 있다.
+         * - 선택자와 일치하는 하나의 요소를 반환
+         * - 복수 개의 해당하는 선택자여도 첫요소만 반환
+         */ 
+        function test7(){
+            // const elem = document.querySelector('#username');
+            const elem = document.querySelector('[name=fruit]');
+            console.log(typeof elem, elem);
+            console.dir(elem);
+        }
+
+         /**
+         * querySelectorAll
+         * - css 선택자를 통해 DOM 요소를 접근할 수 있다.
+         * - 선택자와 일치하는 모든 요소 유사배열에 반환
+         */ 
+        function test8(){
+            const elems = document.querySelectorAll('[name=fruit]');
+            console.log(typeof elems, elems);
+            for(let i = 0; i < elems.length; i++){
+                console.log("%s : %s", elems[i].id, elems[i].checked);
+            }
+        }
+    </script>
+    
+</body>
+</html>

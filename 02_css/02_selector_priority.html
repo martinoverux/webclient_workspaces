@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>선택자 우선순위</title>
+</head>
+<body>
+    <h1>선택자 우선순위</h1>
+    <!--
+        !important 최우선        
+        인라인
+
+        a  #id
+        b .class, 속성
+        c tag, 상태
+
+        *  우선순위 없음
+     -->
+     <!-- p>lorem -->
+     <p id="myp" class="text" title="오늘의 한 문장" style="color: cyan;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur provident fugit repudiandae doloribus recusandae, quam vel perferendis sunt architecto voluptatem laborum facilis veritatis, illo commodi alias corporis, ipsam mollitia aliquid!</p>
+     <style>
+     
+     p#myp {color: blueviolet;}
+     body p.text {color: yellow !important;}
+     p {color: pink;}
+     
+
+
+     </style>
+
+
+</body>
+</html>

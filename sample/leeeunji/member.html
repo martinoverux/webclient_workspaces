@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EunJi Life</title>
+    <link rel="shortcut icon" href="./images/logo_home.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/member.css">
+    <script src="./js/postcodeAPI.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+
+    <div id="container">
+        <header>
+            <ul class="menu">
+                <li><a id="AboutMe" href="aboutme.html">About Me</a></li>
+                <li>
+                    <a id="spareTime" href="#">Spare time</a>
+                    <ul class="submenu">
+                        <li><a class="subM-transition" href="foodtrip.html">Food trip</a></li>
+                        <li><a class="subM-transition" href="#">Music</a></li>
+                    </ul>
+                </li>
+                <li><a href="roadmap.html">Roadmap</a></li>
+                <li><p id="blankP"></p></li>
+                <li class="memberMenu"><a href="login.html">login</a></li>
+                <li class="memberMenu"><a href="member.html">join</a></li>
+            </ul>
+            <a href="index.html">
+                <img src="./images/logo_home.png" alt="home logo" id="homeLogo">
+            </a>
+        </header>
+        
+        <div class="toTheTop">
+            <a href="#top">
+                <img src="./images/outline_vertical_align_top_black_24dp.png" alt="to the top">
+            </a>
+        </div>
+
+        <section class="joinSection">
+            <form action="">
+                <h1>회원가입</h1>
+
+                <fieldset class="join-fieldset basicInfo">
+                    <h1>기본정보</h1>
+                    <hr>
+                    <ul>
+                        <li>
+                            <label for="userId">아이디</label>
+                            <input type="text" name="userId" id="userId" required>
+                        </li>
+                        <li>
+                            <label for="userPw">비밀번호</label>
+                            <input type="password" name="userPw" id="userPw" required>
+                        </li>
+                        <li>
+                            <label for="userPwCheck">비밀번호 확인</label>
+                            <input type="password" name="userPwCheck" id="userPwCheck" required>
+                        </li>
+                        <li>
+                            <label for="userName">이름</label>
+                            <input type="text" name="userName" id="userName" required>
+                        </li>
+                        <li class="genderLi">
+                            <label>성별</label>
+                            <input type="radio" name="gender" id="gender-male" value="male" required>
+                            <label id="maleLabel" for="gender-male">남</label>
+                            <input type="radio" name="gender" id="gender-female" value="female">
+                            <label id="femaleLabel" for="gender-female">여</label>
+                        </li>
+                        <li>
+                            <label>전화번호</label>
+                            <select name="tel1" id="tel1">
+                                <option value="010" selected>010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="018">018</option>
+                                <option value="019">019</option>
+                                <option value="02">02</option>
+                                <option value="031">031</option>
+                                <option value="032">032</option>
+                                <option value="033">033</option>
+                                <option value="041">041</option>
+                                <option value="042">042</option>
+                                <option value="043">043</option>
+                                <option value="044">044</option>
+                                <option value="051">051</option>
+                                <option value="052">052</option>
+                                <option value="053">053</option>
+                                <option value="054">054</option>
+                                <option value="055">055</option>
+                                <option value="061">061</option>
+                                <option value="062">062</option>
+                                <option value="063">063</option>
+                                <option value="064">064</option>
+                                <option value="0502">0502</option>
+                                <option value="0503">0503</option>
+                                <option value="0504">0504</option>
+                                <option value="0505">0505</option>
+                                <option value="0506">0506</option>
+                                <option value="0507">0507</option>
+                                <option value="0508">0508</option>
+                                <option value="070">070</option>
+                            </select>
+                            <span>-</span>
+                            <input type="tel" name="tel2" id="tel2" minlength="3" maxlength="4" size="4" required>
+                            <span>-</span>
+                            <input type="tel" name="tel3" id="tel3" minlength="4" maxlength="4" size="4" required>
+                        </li>
+                        <li>
+                            <label for="email">이메일</label>
+                            <input type="email" name="email" id="email" required>
+                        </li>
+                    </ul>
+                    
+                </fieldset>
+
+                <fieldset class="join-fieldset additionalInfo">
+                    <h1>추가정보(선택)</h1>
+                    <hr>
+                    <ul>
+                        <li>
+                            <label class="address" for="searchAddress">주소</label>
+                            <div class="address">
+                                <input type="text" id="postcode" placeholder="우편번호" disabled>
+                                <input type="button" id="searchAddress" onclick="execDaumPostcode()" value="주소검색"><br>
+                                <input type="text" id="address" placeholder="기본주소" disabled><br>
+                                <input type="text" id="detailAddress" placeholder="상세주소">
+                            </div>
+                        </li>
+                        <li>
+                            <label for="birth">생년월일</label>
+                            <input type="date" name="birth" id="birth" value="0000/00/00"><br>
+                        </li>
+                        <li class="mailingLi">
+                            <input type="checkbox" name="mailing" id="mailing" value="true">
+                            <label for="mailing">정보성 메일 수신 동의</label>
+                        </li>
+                    </ul>
+                </fieldset>
+                <input id="submitBtn" type="submit" value="회원가입">
+            </form>
+        </section>
+
+
+        <footer>
+            <hr>
+            <p class="footInfo">
+                <span>제작자 : 이은지</span>
+                <span>소속 : KH정보교육원</span>
+                <span>수강 : 자바기반 공공데이터 융합 개발자 양성과정</span>
+            </p>
+            <p class="footInfo">
+                <span>전화 : 010-1995-0408 </span>
+                <span>이메일 : leeeunji@gmail.com</span>
+            </p>
+            <p class="footInfo">
+                <span>주소 : 인천광역시 남동구 이런저런로78-9</span>
+            </p>
+        </footer>
+
+    </div>
+
+
+    
+</body>
+</html>

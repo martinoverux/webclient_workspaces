@@ -1,0 +1,177 @@
+#container {
+    height: 1800px;
+    background-image: url(../images/seoulforest.jpg);
+    background-repeat: no-repeat;
+    background-size: 1024px;
+}
+header {
+    height: 180px;
+    background: none;
+}
+.menu a {
+    color: #D9CDBF;
+}
+.menu #AboutMe {
+    color: #8A8C3E;
+    font-weight: 700;
+}
+.menu a:hover {
+    color: #fff;
+}
+
+.submenu li:hover a {
+    color: #fff;
+}
+hr {
+    width: 800px;
+    height: 1px;
+    background-color: #D9CDBF;
+    opacity: .5;
+    border: none;
+}
+/*==================== section =====================*/
+img.arrow {
+    margin-top: 10px;
+    width: 60px;
+    transform: rotate(90deg);
+}
+/*--------------------- intro ----------------------*/
+section {
+    color: #fff;
+    text-shadow: .7px .7px 5px rgb(51, 51, 51, .4);
+}
+.intro {
+    height: 508px;
+    padding: 30px, 0;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+.intro h1 {
+    margin-bottom: 50px;
+    font-size: 40px;
+}
+.intro .blankP {
+    opacity: 0;
+    line-height: 0.5em;
+}
+.intro #toCnCBtn {
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+
+    background: rgb(51, 51, 51, .3);
+    border: 1px solid rgb(255, 255, 255, .8);
+    border-radius: 20px;
+
+    color: #fff;
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 18px;
+}
+/*--------------------- second ---------------------*/
+.channel {
+    padding-top: 100px;
+    height: 400px;
+    text-align: center;
+}
+.channel h1 {
+    margin: 50px auto 30px;
+    font-size: 45px;
+}
+.channel ul {
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+
+    list-style: none;
+}
+.channel li {
+    margin: 0 30px;
+    width: 300px;
+    height: 150px;
+    background-color: #d9cdbf60;
+    border: 1px solid #0D0D0D;
+}
+.channel a {
+    opacity: 1;
+
+    width: inherit;
+    height: inherit;
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    text-decoration: none;
+    font-family: 'Nanum Myeongjo', serif;
+    font-style: italic;
+    font-size: 30px;
+    letter-spacing: -1px;
+    color: #fff;
+}
+.channel a:hover {
+    color: #0000;
+}
+#gitHub:hover {
+    opacity: 0.8;
+    background-position: center;
+    color: #0d0d0d00;
+    background-image: url(../images/github_black.png);
+}
+#notion:hover {
+    opacity: 0.8;
+    background-position: center;
+    color: #0d0d0d00;
+    background-image: url(../images/notion_black.png);
+}
+
+/*--------------------- third ----------------------*/
+.third{  
+    width: inherit;
+    height: 450px;
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.third section {
+    float: left;
+    margin: 0 100px;
+}
+.third h1 {
+    height: 70px;
+    margin: 70px 0 35px;
+    font-size: 45px;
+}
+.education div, .certificate div {
+    height: 230px;
+    padding: 10px;
+    line-height: .5em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.education p {
+    margin: 15px
+}
+#univName {
+    font-size: 24px;
+}
+#major, .certificateName {
+    font-size: 18px;
+}
+#univPeriod, .certifiedDate {
+    margin-top: 10px;
+    opacity: .8;
+    color: #ddd;
+    font-weight: 100;
+}
+
+/*===================== footer =====================*/
+footer {
+    margin: 0 -12px;
+    background-color: #313629;
+    color: #ddd;
+}

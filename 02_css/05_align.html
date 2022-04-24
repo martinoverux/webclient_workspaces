@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정렬</title>
+</head>
+<body>
+    <h1>정렬</h1>
+    <!-- 
+        inline 요소 정렬
+            - 부모 block 요소의 text-align 속성으로 좌/우/가운데 정렬
+            - h1, p태그 안의 text도 같은 방식으로 정렬
+        block 요소 정렬
+            - margin값을 이용해 좌/우/가운데 정렬
+            - margin은 페이지 내에서 다른 요소와의 거리(여백)
+
+     -->
+     <div id="wrapper1">
+         <span>안녕하세요</span>
+         <br>
+         <img src="../sample/image/hyunta.jpg" alt="" style="width: 100px;">
+     </div>
+     <h2 class="align">여보세요</h2>
+     <p class="align">날씨가 너무 좋습니다.</p>
+     <style>
+         #wrapper1 {
+             text-align: center;
+         }
+         .align {
+             text-align: center;
+         }
+     </style>
+
+     <div class="box"></div>
+     <style>
+         .box {
+             width: 200px;
+             height: 200px;
+             background-color: steelblue;
+             border: 3px solid #000;
+             /*상 우 하 좌 시계방향으로 마진값을 부여*/
+             /* margin : 10px 20px 30px 40px */
+             /* 상 우 하 [좌 = 우] */
+             /* margin: 10px 20px 30px;  */
+             /* 상 우 [하 = 상] [좌 = 우]*/
+             /* margin: 10px 20px; */
+             /* 상 [우=상] [하=상] [좌 = 상] */
+            /* margin: 10px; */
+
+            /* 가운데 정렬: 상: 0 우 하: 0 좌 (좌우의 값이 같도록 자동 처리) */
+            /* margin: 0 auto; */
+
+            /* 우측 정렬 */
+            margin-right: auto;
+            
+            /* 좌측정렬 */
+            /* margin-left: auto; */
+         }
+     </style>
+
+     <div id="wrapper3">
+         <img src="../sample/image/hyunta.jpg" alt="" style="width: 100px">
+         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Explicabo dignissimos consequuntur repellat exercitationem nostrum quo recusandae neque? Repellat doloremque magnam accusantium quasi! Odit, eveniet quis dolorum eligendi voluptatem dicta voluptates?</p>
+
+        </div>
+    <style>
+        #wrapper3 {
+            margin-top: 30px;
+            border: 3px solid #000;
+        }
+
+        #wrapper3 img {
+            float: left;
+        }
+
+        #wrapper3 p {
+            clear: left; /* 이전 요소의 float 속성을 무효화*/
+        }
+    </style>
+
+</body>
+</html>
