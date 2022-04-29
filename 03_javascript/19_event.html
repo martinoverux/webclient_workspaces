@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event</title>
+  <script>
+  /**
+   * window.onload - html문서의 DOM등록 완료시 발생하는 이벤트
+   * 
+   * window.onload와 body.onload 동일하다.
+   */
+  // window.onload = () => {
+  //   alert('페이지 로딩이 완료되었습니다. 1');
+  // };
+  // window.addEventListener('load', () => {
+  //   alert('페이지 로딩이 완료되었습니다. 2');
+  // });
+  // const init = () => {
+  //   alert('페이지 로딩이 완료되었습니다. 3');
+  // };
+  </script>
+</head>
+<body onload="/* init(); */">
+  <h1>Event</h1>
+  <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">https://www.w3schools.com/tags/ref_eventattributes.asp</a>
+  <br>
+  <!-- 
+    웹페이지에서 일어나는 사용자의 action, 네트워크상의 처리상태변화 등이 모두 하나의 이벤트로 관리된다.
+    이벤트가 발생하면 미리 등록된 이벤트핸들러(이벤트리스너)에 의해 다음 처리가 일어난다.
+    A -> B
+
+    1. html요소의 inline 이벤트속성에 작성 (이벤트객체변수명은 event로 고정)
+    2. html요소의 이벤트속성에 함수바인딩
+    3. html요소.addEventListener(event, listener) - n개의 listener등록가능
+  -->
+  <button id="btn1" onclick="test1(event);">클릭미 #btn1</button>
+  <button id="btn2">클릭미 #btn2</button>
+  <button id="btn2-1">#btn2 이벤트핸들러 제거</button>
+  <button id="btn3">클릭미 #btn3</button>
+  <button id="btn3-1">#btn3 이벤트핸들러 제거</button>
+  <script>
+  /**
+   * 1. html태그의 inline속성에 작성하기
+   * button태그의 click(A)가 발생하면, test1호출(B)해라
+   */
+  const test1 = (e) => {
+    console.log("test1");
+    console.log(btn1.onclick);
+    console.log(e);
+    /*
+      ƒ onclick(event) {
+        test1();
+      } 
+    */
+  };
+
+  /**
+   * 2. html요소의 이벤트속성(onXXX)에 함수바인딩
+   */
+  const bar = () => {
+    console.log("test2");
+    console.log(btn2.onclick);
+  }; 
+  // btn2.onclick = bar(); // bar호출결과(리턴값)를 onclick에 바인딩
+  btn2.onclick = bar; // bar 함수 자체를 연결
+
+  document.querySelector("#btn2-1").onclick = () => {
+    console.log("#btn2 이벤트핸들러 제거! :", btn2.onclick);
+    btn2.onclick = undefined;
+  };
+
+
+  /**
+   * 3. html요소.addEventListener(event, listener) - n개의 listener등록가능
+   * 
+   * 크롬개발도구 : getEventListeners(document.querySelector("#btn3"));
+   */
+  const f = () => {
+    console.log("test3-1");
+  };
+  btn3.addEventListener('click', f);
+  btn3.addEventListener('click', () => {
+    console.log("test3-2");
+  });
+
+  document.querySelector("#btn3-1").addEventListener('click', () => {
+    console.log('이벤트핸들러 제거 :', f);
+    // 제거할 함수를 함께 전달
+    btn3.removeEventListener('click', f);
+  });
+  </script>
+
+  <br><br>
+  <button id="btn4">@실습문제 : 이미지 동적로딩</button>
+  <div class="img-wrapper" style="border: 1px solid gray; margin: 10px 0; width: 300px;"></div>
+  <script>
+  /**
+   * @실습문제 : 이미지 동적로딩
+   * - 동적으로 이미지태그를 생성하고, 이미지 로딩이 완료되면 '이미지가 로딩되었습니다.' alert처리할 것.
+   * - document.createElement로 img태그 생성할 것
+   * - sample/image/???.
+   */
+  btn4.onclick = () => {
+    const img = document.createElement('img');
+    img.src = '../sample/image/flower1.PNG';
+    img.style.width = '100%';
+    img.style.borderRadius = '50%';
+    img.onload = () => {
+      alert('이미지가 로딩되었습니다.');
+    };
+    document.querySelector("div.img-wrapper").append(img);
+  }
+  </script>
+
+  <button id="btn5" value="123">이벤트객체 | 이벤트발생객체</button>
+  <script>
+  /**
+   * 이벤트객체 - 이벤트관련정보(타입, 발생위치, ...)를 가진 객체
+   * 이벤트발생객체 - 이벤트객체.target 속성 참조
+   *
+   * this용법6. 이벤트핸들러함수(일반함수)안의 this는 이벤트발생객체를 가리킨다.
+   */
+  btn5.onclick = function(e){
+    console.log(e);
+    const {target} = e;
+    console.log(target); // 이벤트발생객체 #btn5
+    console.log(this);  // 이벤트발생객체 #btn5
+    console.log(target === this); // true
+
+    // 이벤트발생객체의 정보가져오기
+    console.log(target.value);
+    console.log(this.value);
+  }
+  </script>
+
+  <form action="" name="usernameFrm">
+    <fieldset>
+      <legend>form event</legend>
+      <input type="text" name="username" id="username" placeholder="username을 입력하세요.">
+      <input type="text" name="usernameCopy" id="usernameCopy">
+      <input type="submit" value="제출">
+    </fieldset>
+  </form>
+  <script>
+  username.addEventListener('focus', (e) => {
+    // console.log(e); // FocusEvent
+    // console.log(e.target, e.type);
+  });
+  username.addEventListener('blur', (e) => {
+    // console.log(e); // FocusEvent
+    // console.log(e.target, e.type);
+
+    // if(e.target.value.length == 0){
+    //   alert("username을 입력해주세요.");
+    // }
+  });
+  
+  /**
+   * Key관련 이벤트 
+   */
+  username.addEventListener('keydown', (e) => {
+    console.log(e.type);
+    if(e.keyCode === 13)
+      e.preventDefault(); // 이벤트 작동방지! 
+  });
+  username.addEventListener('keypress', (e) => {
+    // 한글무시, 기능키무시
+    // console.log(e.type);
+  });
+  /**
+   * keyCode 65 ascii code 
+   * key a 
+   * code KeyA Enter 키별상수값
+   */
+  username.addEventListener('keyup', (e) => {
+    console.log(e.type, e.keyCode, e.key, e.code);
+    console.log(e);
+
+    // 엔터입력 감지
+    // if(e.keyCode === 13){ // keyCode
+    if(e.key === 'Enter'){ // code
+      // 사용자입력값 처리
+      usernameCopy.value = e.target.value;
+    }
+
+  });
+
+  /**
+   * Form submit 이벤트
+   * - 실제 서버로 제출되기 전에 발생
+   * - 사용자 입력값에 대한 유효성 검사
+   * - form[name]은 document하위에 바로 관리된다.
+   */
+  // document.querySelector("form[name=usernameFrm]")
+  document.usernameFrm.onsubmit = (e) => {
+    console.log(e.type);
+    
+    // 입력값 검사!
+    if(username.value.length == 0){
+      alert("username을 입력해주세요.");
+      // return false; // 폼제출방지 (onevent에서만 사용)
+      e.preventDefault(); // onevent, addEventListener 둘다 사용가능
+    }
+
+  };
+  </script>
+
+  <h2>Event Propagation 이벤트 전파</h2>
+  <!-- 
+    bubbling 자식요소에서 발생한 이벤트가 부모로 전파된다. (기본방식)
+      - capturing옵션 : 버블링시에 핸들러 호출순서가 부모 -> 자식 전환
+  -->
+  <div id="bubble1" class="bubble bubble1">
+    <div id="bubble2" class="bubble bubble2">
+      <div id="bubble3" class="bubble bubble3"></div>
+    </div>  
+  </div>
+  <style>
+  .bubble {border: 1px solid black; padding: 20px;}
+  .bubble1 {background-color: lightblue;}
+  .bubble2 {background-color: lightcoral;}
+  .bubble3 {background-color: lightgreen;}
+  </style>
+  <script>
+  document.querySelector("body").onclick = (e) => {
+    console.log("body 클릭!", e.target);
+
+    if(e.target === bubble1){
+      console.log('.bubble1 클릭!');
+    }
+    else if(e.target === bubble2){
+      console.log('.bubble2 클릭!');
+    }
+    else if(e.target === bubble3){
+      console.log('.bubble3 클릭!');
+    }
+  }
+  document.querySelector(".bubble1").onclick = (e) => {
+    console.log('.bubble1 클릭!', e.target);
+  }  
+  document.querySelector(".bubble2").onclick = (e) => {
+    console.log('.bubble2 클릭!', e.target);
+  }  
+  document.querySelector(".bubble3").onclick = (e) => {
+    console.log('.bubble3 클릭!', e.target);
+    // 전파방지
+    e.stopPropagation();
+  }  
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+</head>
+<body>
+  <h1>DOM</h1>
+  <!-- 
+    DOM Document Object Model
+    - 브라우져가 문서를 해석해서 document객체 하위에 계층구조로 태그객체를 관리
+    - document.getElementsByXXX, document.querySelector 메소드는 document하위에서 태그객체 찾는 메소드
+  -->
+  <div id="sample">
+    안녕
+    <!-- 안녕은 한국어로 hello입니다. -->
+    <span>잘가</span>
+  </div>
+  <button onclick="test1();">#sample</button>
+  <button onclick="test2();">태그객체 - textNode</button>
+  <button onclick="test3();">태그객체 - img</button>
+  <div 
+    id="target" 
+    style="background-color: lightgray; margin: 10px 0; padding: 5px; min-height: 50px;"></div>
+  <script>
+  /**
+   * DOM에 등록된 태그객체
+   * - Node객체로 관리가 된다.
+   * - 모든 document하위의 객체는 Node객체를 상속한다.
+   * - textNode, commentNode, span, div, p, ....
+   */
+  const test1 = () => {
+    console.log(sample);
+    console.dir(sample);
+  };
+
+  /**
+   * textNode가 있는 태그객체(Element)
+   * <h2>여보세요~ 봄이 왔어요!</h2>
+   */
+  const test2 = () => {
+    const h2 = document.createElement('h2');
+    const text = document.createTextNode('여보세요~ 봄이 왔어요!');
+    h2.appendChild(text); // 자식 Node추가시
+    target.append(h2); // 자식 Element추가 DOM에 등록
+
+    // target.innerHTML = '<h2>여보세요~ 봄이 왔어요!</h2>';
+  };
+
+  /**
+   * img 태그객체 추가
+   */
+  const test3 = () => {
+    // const img = document.createElement('img');
+    // img.src = '../sample/image/flower1.PNG';
+    // img.style = 'width: 200px;';
+    // target.append(img);
+
+    target.innerHTML = '<img src="../sample/image/flower1.PNG" style="width:200px"/>'
+  };
+  </script>
+
+  <button onclick="test4();">자식요소제거</button>
+  <button onclick="test5();">요소제거</button>
+  <!-- div#foo>p{안녕$}*5 -->
+  <div id="foo">
+    <p>안녕1</p>
+    <p>안녕2</p>
+    <p id="foo3">안녕3</p>
+    <p>안녕4</p>
+    <p>안녕5</p>
+  </div>
+  <script>
+  /**
+   * 자식요소 제거
+   */
+  const test4 = () => {
+    console.log(foo.childNodes); // 텍스트노드 포함 자식요소 반환
+    console.log(foo.children); // 텍스트노드 없이 자식태그요소만 반환
+
+    console.log(foo.firstChild); // 텍스트노드 포함 첫번째 자식요소
+    console.log(foo.firstElementChild); // 첫번째 자식태그요소 제거
+    
+    // foo.removeChild(foo.firstElementChild); // p태그 제거
+
+    while(foo.firstElementChild)
+      foo.removeChild(foo.firstElementChild);
+  };
+
+  /**
+   * 태그객체 자신을 제거 
+   */
+  const test5 = () => {
+    foo3.remove();
+  }
+  </script>
+
+  
+  <button onclick="test6();">Traversing - Node</button>
+  <button onclick="test7();">Traversing - Element</button>
+  <button onclick="test8();">@실습문제 - 자식요소의 TextNode변경</button>
+  <div class="wrapper">
+    <p id="p1">Hello world1</p>
+    <p id="p2">Hello world2</p>
+    <p id="p3">Hello world3</p>
+    <p id="p4">Hello world4</p>
+    <p id="p5">Hello world5</p>
+  </div>
+  <script>
+  /**
+   * Traversing
+   * - 하나의 dom객체로 부터 다른 dom객체 조회하는 방법
+   *
+   * - 부모
+   * - 형제
+   * - 자식
+   * 
+   * Node(텍스트노드포함) | Element(태그객체만 대상) 
+   */
+  const test6 = () => {
+    const src = document.querySelector("div.wrapper");
+    let dest;
+    // dest = src.firstChild; // #text
+    // dest = dest.nextSibling.nextSibling.nextSibling; // p#p1 - #text - p#p2
+    
+    dest = src.lastChild; // #text
+    dest = dest.previousSibling; // p#p5
+    dest = dest.parentNode; // 부모Node(태그객체) div.wrapper
+    
+    console.log(dest);
+    dest.style.color = 'deeppink';
+  };
+
+  const test7 = () => {
+    const src = document.querySelector("div.wrapper");
+    // let dest = src.firstElementChild; // p#p1
+    // dest = dest.nextElementSibling; // p#p2
+
+    let dest = src.lastElementChild; // p#p5
+    dest = dest.previousElementSibling; // p#p4
+    dest = dest.parentElement; // 부모 Element div.wrapper (parentNode와 늘 동일하다.)
+
+    console.log(dest);
+    dest.style.color = 'springgreen';
+  };
+
+  /**
+   * @실습문제 - 자식요소의 TextNode변경
+   */
+  const test8 = () => {
+    const src = document.querySelector("div.wrapper");
+    // console.log(src.childNodes);
+    console.log(src.children);
+    // const arr = Array.from(src.children);
+    const arr = [...src.children]; // 전개연산자
+    console.log(arr);
+    arr.forEach((child, index) => {
+      console.log(index, child);
+      const text = document.createTextNode(`DOM${index + 1}`);
+      // child.removeChild(child.firstChild);
+      // child.appendChild(text);
+
+      // replaceChild(newNode, oldNode);
+      child.replaceChild(text, child.firstChild);
+    });
+    
+  }
+  </script>
+  
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

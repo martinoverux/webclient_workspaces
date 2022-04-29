@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+</head>
+<body>
+    <h1>BOM</h1>
+    <button onclick="test1();">navigator</button>
+    <script>
+        /**
+         * navigator
+         * - 브라우져에 대한 정보
+         */
+        const test1 = () =>{
+            console.log(window.navigator);
+            console.log('userAgent : ', navigator.userAgent);
+            // chrome userAgent :  Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36
+            // firefox Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0
+            // safari userAgent :  – "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15"
+        };
+
+        </script>
+        
+        <br>
+        <button onclick="test2();">location</button>
+        <button onclick="test3();">location.href</button>
+        <button onclick="test4();">location.reload()</button>
+        <script>
+            // location
+            // - 주소 표시줄 : 현재 접속한 페이지 주소관련 정보
+            const test2 = () => {
+                console.log(location);
+                const {protocol, hostname, port, pathname, search, hash} =location;
+                console.log(protocol, hostname, port, pathname, search, hash);
+            };
+
+            /**
+             * location.href = 페이지 이동
+             */
+            const test3 = () => location.href = "https://www.naver.com";
+            
+            /**
+             * location.reload  = 새로 고침
+             */
+            const test4 = () => location.reload();
+        </script>
+
+        <br>
+        <button onclick="test5();">history</button>
+        <button onclick="history.forward();">history.forward</button>
+        <button onclick="history.back();">history.back</button>
+        <button onclick="test6();">history.go</button>
+        <script>
+            /**
+             * history
+             * - 브라우져 방문 기록 정보
+             */
+            const test5 = () => {
+                console.log(history);
+            }
+
+            /**
+             * go
+             * - go(0) 새로고침
+             * - go(1) 앞으로 가기 +1
+             * - go(-1) 뒤로 가기 -1
+             */
+            const test6 = () => {
+                // history.go(0);
+                // history.go(1);
+                history.go(-1);
+            };
+        </script>
+
+        <br>
+        <button onclick="test7();">screen</button>
+        <script>
+            /**
+             * screen
+             * - 모니터(hw)에 대한 정볼르 가진 객체
+             */
+            const test7 = () => {
+                console.log(screen);
+
+                const screenWidth =screen.width;
+                const screenHeight = screen.height;
+                const popupWidth = 300;
+                const popupHeight = 300;
+                const left = (screenWidth - popupWidth) / 2;
+                const top = (screenHeight - popupHeight) / 2;
+
+                open("", "popup", `width=${popupWidth}, height=${popupHeight}, left=${left}, top=${top}`);
+            }
+        </script>
+
+</body>
+</html>

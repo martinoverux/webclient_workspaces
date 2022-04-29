@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Window</title>
+</head>
+<body onload="init();">
+  <h1>Window</h1>
+  <!--
+    웹페이지의 모든 자원을 관리하는 최상위객체
+    - window, this, globalThis 키워드를 통해 접근이 가능하다.
+    - BOM Browser Object Model(navigator, location, history, screen, XMLHttpRequest, frames...)
+    - DOM Document Object Model(document) 
+    - javascript (Object, Array, String, ...)
+  -->
+  <button onclick="test1();">open</button>
+  <button onclick="test2();">close</button>
+  <script>
+  /**
+   * open
+   * - 새로운 탭 또는 팝업창을 여는 메소드
+   * - open(주소, 윈도우명, 스펙) : 새윈도우객체
+   * - 윈도우명 : 브라우져의 탭들을 관리하는 이름. 
+   *    - 기존에 열린 탭중에 해당이름이 존재하면 그 탭에 open, 존재하지 않으면 새로 생성.
+   *    - "_self" 현재탭에 해당 페이지를 open
+   */
+  let newWindow;
+  const test1 = () => {
+    // const newWindow = open("index.html", "_self", "");
+    newWindow = open("index.html", "popup", "width=500, height=300, top=300, left=200");
+    console.log(newWindow);
+
+    setTimeout(() => {
+      newWindow.alert("안녕!!!!");
+    }, 3000);
+  };
+
+  const test2 = () => {
+    newWindow.close();
+  };
+  </script>
+
+  <h2>Timer API</h2>
+  <button onclick="test3();">setTimeout</button>
+  <button onclick="test4();">clearTimeout</button>
+
+  <fieldset>
+    <legend>타이머 폼</legend>
+    <input type="text" id="message" placeholder="타이머 메세지를 작성하세요...">
+    <br>
+    <input type="number" id="sec" min="0" step="10" placeholder="타이머 초를 작성하세요...">
+    <br>
+    <input type="button" value="타이머 생성" onclick="test5();">
+    <input type="button" value="타이머 취소" onclick="test6();">
+  </fieldset>
+  <script>
+  /**
+   * @실습문제 : 타이머 생성폼
+   */
+  let userTimeoutId;
+  const test5 = () => {
+    if(!message.value || !sec.value) 
+      return;
+
+    const _message = message.value;
+    userTimeoutId = setTimeout(() => {
+      alert(_message);
+    }, sec.value * 1000);
+
+    alert(`${sec.value}초후 타이머가 생성되었습니다.`);
+    message.value = '';
+    sec.value = '';
+  };
+  const test6 = () => {
+    clearTimeout(userTimeoutId);
+    alert('타이머가 취소 되었습니다.');
+  };
+
+  /**
+   * setTimeout(callbackFunction, millis):timeoutId
+   * clearTimeout(timeoutId)
+   */
+  let timeoutId;
+  const test3 = () => {
+    timeoutId = setTimeout(() => {
+      alert("Foooooooooooooooooooooooooo!!!");
+    }, 3000);
+    console.log("timeoutId : ", timeoutId);
+  }
+  const test4 = () => {
+    clearTimeout(timeoutId);
+    console.log(`${timeoutId}번 타이머 취소`);
+  };
+  </script>
+
+  <button onclick="test7();">setInterval</button>
+  <button onclick="test8();">clearInterval</button>
+  <h3 id="counter"></h3>
+
+  <script>
+  /**
+   * setInterval(callbackFunction, millis) 
+   * - millis초 이후부터 millis초간격으로 callbackFunction을 호출
+   */
+  let intervalId;
+  const test7 = () => {
+    let initNum = 10;
+
+    intervalId = setInterval(() => {
+      counter.innerHTML = --initNum;
+
+      if(initNum === 0){
+        clearInterval(intervalId);
+      }
+    }, 1000);
+    console.log('intervalId : ', intervalId);
+  };
+
+  const test8 = () => {
+    clearInterval(intervalId);
+    console.log(`${intervalId} 인터벌 중지`);
+  };
+
+  /**
+   * 페이지 로딩이 끝나면 시계를 작동시켜주세요
+   */
+  function displayClock(date){
+    const f = function(n){
+      return (n < 10) ? "0" + n : n;
+    };
+
+    const yyyy = date.getFullYear();
+    const MM = f(date.getMonth() + 1);
+    const dd = f(date.getDate());
+    const hh = f(date.getHours());
+    const mm = f(date.getMinutes());
+    const ss = f(date.getSeconds());
+
+    const str = `${yyyy}/${MM}/${dd} ${hh}:${mm}:${ss}`;
+    clock.innerHTML = str;
+
+  }
+
+  // displayClock(new Date()); // #clock이 DOM 등록전이라 찾을 수 없어 오류!!
+
+  const init = () => {
+    displayClock(new Date()); // #clock이 DOM등록 완료후이므로 정상작동!
+    
+    // setInterval(() => {
+    //   displayClock(new Date());
+    // }, 1000);
+  };
+  </script>
+  <h3 id="clock"></h3>
+
+  
+
+</body>
+</html>

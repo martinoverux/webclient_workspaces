@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규표현식 - 주민번호</title>
+</head>
+<body>
+    <h1>정규표현식 - 주민번호</h1>
+    <input type="text" id="ssn1" placeholder="900909-1234567">
+    <button id="btn1">확인</button>
+    <script>
+        /**
+         * 올바른 자릿수의 주민번호를 입력한 경우, 
+         * - 올바른 주민번호입니다.
+         * 유효하지 않은 주민번호를 입력한 경우
+         * - 주민번호가 유효하지 않습니다.
+         */
+        btn1.onclick = () => {
+            const inputNo = document.querySelector('#ssn1').value;
+            const regexp = /^[0-9]{13}$/;
+            const inputNoRep = inputNo.replace(/-/, "");
+            if (regexp.test(inputNoRep))
+                alert('올바른 주민번호입니다.');
+            else
+                alert('주민번호가 유효하지 않습니다.');
+        };
+    </script>
+</body>
+</html>
