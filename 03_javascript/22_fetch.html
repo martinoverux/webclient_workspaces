@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비동기통신</title>
+  
+  <!-- ie에서 es6사용을 위한 babel transcompiler -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js" integrity="sha512-kp7YHLxuJDJcOzStgd6vtpxr4ZU9kjn77e6dBsivSz+pUuAuMlE2UTdKB7jjsWT84qbS8kdCWHPETnP/ctrFsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.12.1/polyfill.min.js" integrity="sha512-uzOpZ74myvXTYZ+mXUsPhDF+/iL/n32GDxdryI2SJronkEyKC8FBFRLiBQ7l7U/PTYebDbgTtbqTa6/vGtU23A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fetch-polyfill@0.8.2/fetch.min.js"></script>
+  
+  <!-- babel 이후에 load할 것!-->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+</head>
+<body>
+  <h1>비동기통신</h1>
+  <button id="btn1">fetch</button>
+  <button id="btn2">json</button>
+  <button id="btn3">github avatar img</button>
+  <div id="fetch-result"></div>
+  <div id="img-wrapper"></div>
+  <style>
+  #img-wrapper, .img-wrapper {
+    width: 200px;
+    margin: 10px 0;
+  }
+  #img-wrapper img, .img-wrapper img {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px 5px lightgray;
+  }
+  </style>
+  <script type="text/babel">
+  const USER_URL = "https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user";
+  /**
+   * 네트워크 통신 - 비동기처리 (XMLHttpRequest객체)
+   * - fetch : Promise객체로 반환
+   */
+  btn1.addEventListener('click', () => {
+    fetch(USER_URL)
+      .then((response) => {
+        // 첫 응답메세지가 도착했을때 resolve실행.
+        console.log(response);
+        return response.json(); // json데이터를 js object 변환
+      })
+      .then((data) => {
+        console.log('data : ', typeof data, data);
+        const container = document.querySelector("#fetch-result");
+        container.innerHTML = `<table>
+  <tr>
+    <th>id</th>
+    <td>${data.id}</td>
+  </tr>          
+  <tr>
+    <th>company</th>
+    <td>${data.company}</td>
+  </tr>          
+  <tr>
+    <th>classroom</th>
+    <td>${data.classroom}</td>
+  </tr>          
+</table>`;
+
+      });
+  });
+
+  /**
+   * json
+   * - Javascript Object Notation
+   * - 이종간의 통신에서 data를 주고받기 위한 포맷언어
+   */
+  btn2.addEventListener('click', () => {
+    // javascriopt object/array -> json
+    const obj = {
+      name: '홍길동',
+      age: 33,
+      sns: ['instagram', 'twitter'],
+      family: {
+        father: "홍아빠",
+        motehr: "홍엄마"
+      },
+      married : false
+    };
+    // console.log(obj);
+    const jsonObj = JSON.stringify(obj);
+    // console.log(typeof jsonObj, jsonObj);
+    // string {"name":"홍길동","age":33,"sns":["instagram","twitter"],"family":{"father":"홍아빠","motehr":"홍엄마"},"married":false}
+
+    // json -> js object
+    const other = JSON.parse(jsonObj);
+    console.log(typeof other, other);
+    
+  });
+
+  /**
+   * 1. https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user -> user.id
+   * 2. https://api.github.com/users/shqkel -> avartar_url 
+   * 3. img.src="https://avatars.githubusercontent.com/u/39724768?v=4"
+   */
+  const GITHUB_URL = "https://api.github.com/users/";
+  btn3.addEventListener('click', () => {
+    fetch(USER_URL)
+      .then(response => response.json())
+      .then(user => {
+        // console.log(user);
+        const {id} = user;
+        return fetch(`${GITHUB_URL}${id}`); // 명시적으로 promise를 리턴
+      })
+      .then(response => response.json())
+      .then((githubUser) => {
+        console.log(githubUser);
+        const {avatar_url} = githubUser;
+        const img = document.createElement('img');
+        img.src = avatar_url;
+        document.querySelector("#img-wrapper").appendChild(img);
+      });
+  });
+  </script>
+
+  <button id="btn4">Axios - Dog</button>
+  <div class="img-wrapper dog"></div>
+  <button id="btn5">Axios - Cat</button>
+  <div class="img-wrapper cat"></div>
+  <script type="text/babel">
+  const DOG_URL = 'https://dog.ceo/api/breeds/image/random';
+  btn4.addEventListener('click', () => {  
+    // promise를 리턴(응답메시지 수신을 완료했을때 이행)
+    axios.get(DOG_URL)
+      .then((response) => {
+        console.log(response);
+        const {data : {message}} = response;  
+        const img = document.createElement("img");
+        img.src = message;
+        document.querySelector(".img-wrapper.dog").appendChild(img);
+      });
+  });    
+
+  const CAT_URL = 'https://api.thecatapi.com/v1/images/search';
+  btn5.addEventListener('click', () => {
+    // header에 추가될 속성 x-api-key 설정
+    axios.defaults.headers.common['x-api-key'] = "202de7b9-d66f-4322-a946-75c4119ae02d";
+    axios.get(CAT_URL, {
+      params: {
+        limit: 1,
+        size: 'full'
+      }
+    })
+      .then((response) => {
+        console.log(response); // response.data[0].url
+        const {data:[{url}]} = response;
+        console.log(url);
+
+        const img = document.createElement('img');
+        img.src = url;
+        img.onload = () => {
+          setTimeout(() => {
+            img.remove();
+          }, 3000);
+        };
+        document.querySelector(".img-wrapper.cat").appendChild(img);
+      });
+  });
+  </script>
+  
+  <br><br>
+
+  <button id="btn6">github avatar - async</button>
+  <button id="btn7">dog - async</button>
+  <button id="btn8">cat - async</button>
+  <script type="text/babel" data-presets="es2015,stage-2">
+  /**
+   * user.id
+   * githubUser.avatar_url
+   * img.src
+   */
+  btn6.addEventListener('click', async () => {
+    // let response = await axios(USER_URL);
+    // let {data: {id}} = response; // response.data.id
+    // // console.log(response, id);
+
+    // response = await axios(GITHUB_URL + id)
+    // const {data: {avatar_url}} = response;
+    // console.log(response, avatar_url);
+
+    const {data : {id}} = await axios(USER_URL);
+    const {data: {avatar_url}} = await axios(GITHUB_URL + id);
+
+    const img = document.createElement('img');
+    img.src = avatar_url;
+    document.querySelector("#img-wrapper").appendChild(img);
+  });
+
+  btn7.addEventListener('click', async () => {
+    const response = await axios.get(DOG_URL)
+    const {data : {message}} = response;  
+    const img = document.createElement("img");
+    img.src = message;
+    document.querySelector(".img-wrapper.dog").appendChild(img);
+  });
+
+  btn8.addEventListener('click', async () => {
+    // header에 추가될 속성 x-api-key 설정
+    axios.defaults.headers.common['x-api-key'] = "202de7b9-d66f-4322-a946-75c4119ae02d";
+    const  {data:[{url}]} = await axios.get(CAT_URL, {
+      params: {
+        limit: 1,
+        size: 'full'
+      }
+    });
+    const img = document.createElement('img');
+    img.src = url;
+    img.onload = () => {
+      setTimeout(() => {
+        // img.remove();
+        img.parentElement.removeChild(img); // IE전용
+      }, 3000);
+    };
+    document.querySelector(".img-wrapper.cat").appendChild(img);
+
+  });
+  </script>
+</body>
+</html>

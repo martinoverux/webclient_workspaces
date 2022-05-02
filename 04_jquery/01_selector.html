@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>선택자</title>
+  <script src="js/jquery-3.6.0.js"></script>
+</head>
+<body>
+  <h1>선택자</h1>
+  <a href="https://www.w3schools.com/jquery/jquery_ref_selectors.asp">https://www.w3schools.com/jquery/jquery_ref_selectors.asp</a>
+  <!-- div>p#p$.group1{안녕$}*5 -->
+  <div>
+    <p id="p1" class="group1">안녕1</p>
+    <p id="p2" class="group1">안녕2</p>
+    <p id="p3" class="group2">안녕3</p>
+    <p id="p4" class="group2">안녕4</p>
+    <p id="p5" class="group1 group2">안녕5</p>
+  </div>
+  <button id="btn1">선택자</button>
+  <button id="btn2">js객체</button>
+  <script>
+  btn1.addEventListener('click', () => {
+    // $(선택자) : jquery객체를 반환
+    // const $group1 = $(".group1");
+    // console.log($group1);
+    // // console.log($group1.css('background-color', 'springgreen')); 
+    
+    // // jquery객체 다시 반환. method chain
+    // $group1
+    //   .css('background-color', 'springgreen')
+    //   .css('font-weight', 'bold');
+    
+    // jquery버젼 : 각요소에 대한 반복처리, 메소드체이닝 가능
+    $(".group1")
+      .css('background-color', 'springgreen')
+      .css('font-weight', 'bold');
+
+    // vanilla js버젼 : 각요소에 대한 반복처리를 직접 진행
+    const group1 = document.querySelectorAll(".group1");
+    group1.forEach((el, index) => {
+      el.style.backgroundColor = 'springgreen';
+      el.style.fontWeight = 'bold';
+    });
+
+    $("#p1").css("font-size", "2em");
+  });  
+
+
+  /**
+   * $(js객체):jquery객체 반환
+   */
+  btn2.addEventListener('click', () => {
+    // console.log($("#p1"));
+    // console.log($(p1));
+    // $(p1).css("color", "hotpink");
+
+    // const $ppp = $("#p1,#p2,#p3"); // , 사용시 공백제거할 것!
+    const $ppp = $([p1, p2, p3]);
+    console.log($ppp);
+    $ppp.css("color", "tomato");
+  });
+  </script>
+
+  <fieldset>
+    <legend>input</legend>
+    <input type="text">
+    <input type="password">
+
+    <input type="radio">
+    <input type="checkbox">
+    <input type="button" value="버튼">
+    <br><br>
+    <button id="btn3">확인</button>
+  </fieldset>
+  <script>
+  /**
+   * 이벤트명과 동일한 이벤트핸들링 메소드가 제공된다.
+   * css에 없는 가상선택자
+   * :text
+   * :password
+   * :radio
+   * :checkbox
+   * :button
+   * :submit
+   * ..
+   */
+  $(btn3).click(() => {
+    $(":text")
+      .css("background-color", "tomato")
+      .css("color", "white");
+    
+    $(":password")
+      .css({
+        "background-color": "yellowgreen",
+        "color" : "white"
+      });
+    
+    $(":radio,:checkbox").prop("checked", true); // 체크처리
+    $(":button").val("클릭했음!");      
+
+  });
+  </script>
+
+  <table id="people">
+    <!-- thead>tr>th*3 -->
+    <thead>
+      <tr>
+        <th>이름</th>
+        <th>혈액형</th>
+        <th>주소</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- tr>td*3 -->
+      <tr>
+        <td>홍길동</td>
+        <td>A</td>
+        <td>서울시 강남구</td>
+      </tr>
+      <tr>
+        <td>신사임당</td>
+        <td>AB</td>
+        <td>서울시 강서구</td>
+      </tr>
+      <tr>
+        <td>장영실</td>
+        <td>B</td>
+        <td>서울시 강북구</td>
+      </tr>
+      <tr>
+        <td><a href="#">이순신</a></td>
+        <td>O</td>
+        <td>서울시 강동구</td>
+      </tr>
+    </tbody>
+  </table>
+  <button id="btn4">확인</button>
+  <script>
+  /**
+   * 순서관련
+   * :odd 
+   * :even
+   * :first - css에서는 :first-child, :first-of-type
+   * :last - css에서는 :last-child, :last-of-type
+   *
+   * :eq(n) 같은
+   * :gt(n) 큰
+   * :lt(n) 작은
+   * 
+   * :contains(text) 컨텐츠 텍스트 포함여부 (자식, 후손)
+   * :has(selector) 해당선택자 자식요소 포함여부
+   */
+  $(btn4).click(() => {
+    // zero-based index
+    // const $selected = $("#people tr:odd");
+    // const $selected = $("#people tr:even");
+    // const $selected = $("#people tr:first");
+    // const $selected = $("#people tr:last");
+    
+    // const $selected = $("#people tr:eq(3)");
+    // const $selected = $("#people tr:gt(0)");
+    // const $selected = $("#people tr:lt(1)");
+
+    // const $selected = $("#people tr:contains('A')");
+    const $selected = $("#people td:has(a)");
+    
+    $selected.css({
+      "background-color" : "gray",
+      "color" : "white"
+    });
+  });
+  </script>
+  
+</body>
+</html>

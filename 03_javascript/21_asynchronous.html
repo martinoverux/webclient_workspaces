@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>비동기처리</title>
 </head>
 <body>
@@ -226,118 +227,117 @@
         });
     </script>
         <br><br>
-        <button id="btn8">fetch</button>
-        <button id="btn9">json</button>
-        <button id="btn10">실습문제</button>
-        <div id="fetch-result"></div>
-        <div id="img-wrapper"></div>
-        <script>
-        const USER_URL = "https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user";
-        /**
-         * 네트워크 통신 - 비동기처리 (XMLHttpRequest객체)
-         * - fetch : Promise객체로 반환
-         */
-        btn8.addEventListener('click', () => {
-        fetch(USER_URL)
-            .then((response) => {
-            // 첫 응답메세지가 도착했을때 resolve실행.
-            console.log(response);
-            return response.json(); // json데이터를 js object 변환
-            })
-            .then((data) => {
-            console.log('data : ', typeof data,data);
-            const container = document.querySelector("#fetch-result");
-            container.innerHTML = `<table>
-                <tr>
-                    <th>id<th>
-                        <td>${data.id}</td>
-                </tr>
-                <tr>
-                    <th>company<th>
-                        <td>${data.company}</td>
-                </tr>
-                <tr>
-                    <th>classroom<th>
-                        <td>${data.classroom}</td>
-                </tr>
-            </table>`;
-            });
-        });
+        <button id="btn8">async | awiat</button>
+        <button id="btn9">async | awiat - loadScript</button>
+    <script>
+    /**
+     * async
+     * - ES2017에 추가된 문법
+     * - 일반 함수에 promise를 지원하는 문법
+     * 
+     * await
+     * - async 함수 안에서만 사용 가능
+     * - promise를 동기적 처리를 지원
+     */
+    btn8.addEventListener('click', async () => {
+        zoo()
+        .then((value) => console.log(value));
 
-        /**
-         * json
-         * - Javascript Object Notation
-         * - 이종 간의 통신에서 data를 주고받기 위한 포맷언어
-         */
-        btn9.addEventListener('click', () => {
-            // javascript object/array -> json
-             const obj = {   
-                name: '홍길동',
-                age: 33,
-                sns: ['instagram', 'twitter'],
-                family: {
-                    father: '홍아빠',
-                    mother: '홍엄마'
-                },
-                married: false
-            };
-            console.log(obj);
-            const jsonObj = JSON.stringify(obj);
-            console.log(typeof jsonObj, jsonObj);
-            // string {"name":"홍길동","age":33,"sns":["instagram","twitter"],"family":{"father":"홍아빠","mother":"홍엄마"},"married":false}
-            
-            // json -> js object
-            const other = JSON.parse(jsonObj);
-            console.log(typeof other, other);
-        });
+        // qoo()
+        // .then((value) => console.log(value));
 
-        /**
-         * 실습문제
-         * 1. https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user -> user.id
-         * 2. https://api.github.com/users/shqkel -> avartar_url 
-         * 3. img.src="https://avatars.githubusercontent.com/u/39724768?v=4" 
-         */
-        btn10.addEventListener('click', () => {
-            const url = "https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user";
-            let giturl = "https://api.github.com/users/";
-            fetch(url)
-            .then((response) => {
-            return response.json(); 
-            })
-            .then((data) => {
-                giturl += data.id;
-                return giturl;
-            })
-            .then((data) => {
-                fetch(data)
-                .then((response) => {
-                    return response.json();
-                })
-                .then((data) => {   
-                    const container = document.querySelector("#fetch-result");
-                    container.innerHTML = `<img src="${data.avatar_url}">`;    
-                });
-            });
-        });
+        // await 프라미스의 결과값으로 동기적으로 반환
+        const result = await qoo();
+        console.log(result);
 
-        btn10.addEventListener('click', () => {
-            const USER_URL = "https://asia-northeast3-focal-elf-326215.cloudfunctions.net/user";
-            const GITHUB_URL = "https://api.github.com/users/";
-            fetch(USER_URL)
-                .then(response => response.join())
-                .then(user => {
-                    const {id} = user;
-                    return fetch(`${GITHUB_URL}${id}`); // 명시적으로 promise 리턴
-                })
-                .then(response => response.json())
-                .then((githubUser) => {
-                    const {avatar_url} = githubUser;
-                    const img = document.createElement('img');
-                    img.src = avatar_url;
-                    document.querySelector("#img-wrapper").append(img);
-                });
-        });
+        const result2 = await xoo(); // 3초 후 resolve 실행
+        console.log(result2);
+    });
+
+
+    const xoo = () => new Promise((resolve) => {
+        setTimeout(() => resolve(99), 3000)
+    });
+
+    const qoo = () => new Promise((resolve) => resolve(100));
+
+    const zoo = async () => {
+        return 10;
+    };
+
+    // top-level에서 await를 사용하려는 경우 iife 안에서 사용할 것
+    (async () => {
+        const result = await xoo();
+        console.log('iife result : ', result);
+    })();
+
+
+    btn9.addEventListener('click', async () => {
+    //     loadScriptPromise('js/1.js')
+    //     .then((src) => {
+    //         console.log(src, "로딩 완료!");
+    //         const path = bar();
+    //         return loadScriptPromise(path);
+    //     })
+    //     .then((src) => {
+    //         console.log(src, "로딩 완료!");
+    //         const path = car();
+    //         return loadScriptPromise(path);
+    //     })
+    //     .then((src) => {
+    //         console.log(src, "로딩 완료!");
+    //         dar();
+    //     });
+
+
+        let src = await loadScriptPromise('js/1.js');
+        console.log(src, "로딩 완료!");
+        src = bar(); // js/2.js
+        await loadScriptPromise(src);
+        console.log(src, "로딩 완료!");
+        src = car();
+        await loadScriptPromise(src);
+        console.log(src, "로딩 완료!");
+        dar();
+
+    });
 
     </script>
+    
+    <br><br>
+    <button id="btn10">Promise.all</button>
+    <script>
+    /**
+     * Promise API
+     * - Promise.all([promise1, promise2, ...])
+     *    - 모든 promise를 병렬적으로 실행 후, 모든 promise가 완료되었을 때, then절의 callback 실행
+     *    - 모든 promise 성공 시, fullfilled(이행)
+     *    - 하나라도 실패 시, rejected(거부)
+     * - Promise.allSettled
+     * - Promise.race
+     * - Promise.resolve
+     * - Promise.reject
+     */
+    btn10.addEventListener('click', async () => {
+      const promises = [
+          loadScriptPromise('js/1.js'),
+          loadScriptPromise('js/2.js'),
+          loadScriptPromise('js/3.js'),
+      ];
+      Promise.all(promises)
+        .then(values => {
+            values.forEach((value) => console.log(`${value} 로딩완료!`));
+            bar();
+            car();
+            dar();
+        });
+        const values = await Promise.all(promises);
+        values.forEach((value) => console.log(`${value} 로딩완료!`));
+            bar();
+            car();
+            dar();
+    });
+    </script>
+
 </body>
 </html>

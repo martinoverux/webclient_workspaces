@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attr | prop</title>
+    <script src="js/jquery-3.6.0.js"></script>
+    <style>
+        .img-wrapper img{
+            width: 300px;
+            margin: 10px 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>attr | prop</h1>
+    <div class="img-wrapper">
+        <img src="../sample/image/flower1.PNG" alt="">
+        <img src="../sample/image/flower2.PNG" alt="">
+    </div>
+    <button id="btn1">attr</button>
+    <script>
+        /**
+         * attr 메소드
+         * - 문서객체에 작성된 속성관리
+         * - 해당 속성을 가져오거나(getter - attr(속성명)) 설정하는(setter - attr(속성명, 속성값)) 메소드
+         * - getter : 첫번째 요소의 값 반환
+         * - setter : 모든 요소의 값을 설정
+         */
+        $(btn1).click(() => {
+            const $img = $("img");
+            console.log($img);
+
+            // getter
+            console.log($img.attr('src'));
+
+            // setter
+            $img.attr('src', '../sample/image/flower3.PNG');
+
+        });
+    </script>
+
+    <fieldset>
+        <legend>prop</legend>
+        <!-- (input:checkbox[name=menu][value]#menu$+label[for=menu$])*3 -->
+        <input type="checkbox" id="checkAll">
+        <label for="checkAll">전체선택/전체해제</label>
+        <input type="checkbox" name="menu" id="menu1" value="피자">
+        <label for="menu1">피자</label>
+        <input type="checkbox" name="menu" id="menu2" value="햄버거" checked="checked">
+        <label for="menu2">햄버거</label>
+        <input type="checkbox" name="menu" id="menu3" value="핫도그">
+        <label for="menu3">핫도그</label>
+        <br><br>
+        <button id="btn2">확인</button>
+    </fieldset>
+    <script>
+        /**
+         * prop
+         * - 속성값 관리에 true/false 논리형이 필요한 경우에 사용
+         * - 자바스크립트를 이용한 동적 제어 checked
+         */
+        $(btn2).click(() => {
+            const $menu = $('[name=menu]');
+            // console.log($menu);
+            // $menu.prop('checked', true);
+            // console.log($menu.attr('checked')); // html 태그에 checked가 있는가? 있으면 가져오기
+
+            // 체크한 값 확인
+            // jQuery 객체 안의 요소에 대한 반복처리 each
+            const menuChecked = [];
+            $menu.each((index, menu) => {
+                // console.log(index, menu); // menu는 순수 자바스크립트 객체
+                // console.log(menu, $(menu));
+                // console.log(menu.value, $(menu).val());
+                console.log(menu.checked, $(menu).prop('checked'));
+
+                if(menu.checked){
+                // if($(menu).prop('checked')){
+                    menuChecked.push($(menu).val()); // value 속성 가져오기
+                }
+            });
+
+            alert(`${menuChecked}가 체크되어 있습니다.`);
+        });
+        
+        // $(checkAll).click(() => {
+        //     const $menu = $('[name=menu]');
+        //     if($(checkAll).prop('checked')){
+        //         $menu.prop('checked', true);
+        //     }
+        //     else {
+        //         $menu.prop('checked', false);
+        //     }
+        //  });
+        $(checkAll).change((e) => {
+            const checked = $(e.target).prop('checked'); // getter
+            $("[name=menu]").prop("checked", checked);
+         });
+ 
+    </script>
+
+</body>
+</html>

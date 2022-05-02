@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="js/jquery-3.6.0.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>jQuery</title>
+    <script>
+        /**
+         * jQuery 방식의 window.onload 처리
+         */
+        $(document).ready(() => {
+            console.log("jQuery 사용준비 끝1!")
+        });
+        $(() => {
+            console.log("jQuery 사용준비 끝2!")
+        });
+    </script>
+</head>
+<body>
+    <h1>jQuery</h1>
+
+    <ul>
+        <li><a href="01_selector.html">선택자</a></li>
+        <li><a href="02_attr_prop.html">attr | prop</a></li>
+    </ul>
+</body>
+</html>
